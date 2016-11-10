@@ -40,7 +40,7 @@ function pClick(id){
 var influenceId;
 function iClick(id){
     //var id = s.id;
-    //alert($(self).id);
+    //alert(id);
     $('#i-l-low').removeClass('active');
     $('#i-l-high').removeClass('active');
     $('#i-l-middle').removeClass('active');
@@ -116,12 +116,51 @@ function updateDetail(title, possibility, influence, threshold, content, creator
 }
 
 function save(){
+    var title = $("#detail-title").val();
+    var content = $("#detail-content").val();
+    var threshold = $("#detail-threshold").val();
+    var influence = "";
+    if(influenceId == "i-l-high"){
+        influence = "高";
+    }else if(influenceId == "i-l-middle"){
+        influence = "中";
+    }else{
+        influence = "低";
+    }
 
+    var possibility = "";
+    if(possibilityId == "p-l-high"){
+        possibility = "高";
+    }else if(possibilityId == "p-l-middle"){
+        possibility = "中";
+    }else{
+        possibility = "低";
+    }
+    //alert(title+","+content+","+threshold+"影响："+influence+" 可能："+possibility);
+var html = $.ajax({
+    type:"post",
+    url:"#",
+    data:"riskTitle="+title+"&riskPossibility="+possibility+"&riskInfluence="+influence+"&content="+content
+    +"&threshold="+threshold,
+    async:false
+}).responseText;
+    refreshList();
 }
 
 function create(){
     rid = -1;
     updateDetail('','低','低','','','',{});
+}
+
+function del(){
+    //alert(rid);
+    var html = $.ajax({
+        type:"post",
+        url:"#",
+        data:"rid="+rid,
+        async:false
+    }).responseText;
+    refreshList();
 }
 
 $(document).ready(refreshList);
