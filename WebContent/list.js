@@ -1,7 +1,7 @@
 var json;
 var rid;
 function refreshList(){
-    var htmlObject = $.ajax({url:"mockList.txt", async:false});
+    var htmlObject = $.ajax({url:"getRisks", async:false});
     json = JSON.parse(htmlObject.responseText);
 
     var listHtml =

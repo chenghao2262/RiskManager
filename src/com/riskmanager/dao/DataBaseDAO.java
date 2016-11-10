@@ -3,6 +3,7 @@ package com.riskmanager.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.riskmanager.bean.RiskBean;
+import com.riskmanager.bean.TrackerBean;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.springframework.stereotype.Repository;
 
@@ -22,14 +25,46 @@ public class DataBaseDAO {
 	@Resource
 	private JdbcUtils utils;
 
+    public List<Object[]> getAllrisk() {
+        // dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据
+
+        QueryRunner queryRunner = new QueryRunner();
+        Connection connection=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver Load Success.");
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/riskmanager?"
+                    + "user=root&password=&useUnicode=true&characterEncoding=UTF8");    //创建数据库连接对象
+            System.out.println("debug:");
+            List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_tracker  on risk.rid=risk_tracker.rid",
+                    new ArrayListHandler());
+            return list;
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }     //加载JDBC驱动
+        catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
 	public UserBean getUserBeanByName(String name) {
 		QueryRunner queryRunner = new QueryRunner();
+		Connection connection=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver Load Success.");
 
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/riskmanager?"
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/riskmanager?"
 					+ "user=root&password=&useUnicode=true&characterEncoding=UTF8");    //创建数据库连接对象
 			System.out.println("debug:");
 			UserBean userBean = queryRunner.query(connection, "select * from user where username=?",
@@ -43,20 +78,16 @@ public class DataBaseDAO {
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
 
 	private List<RiskBean> list;
-	private Map<String, Object> dataMap;
 
-	public String getAllrisk() {
-		// dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据
-		dataMap = new HashMap<>();
-		return "SUCCESS";
-	}
-
-	public Map<String, Object> getDataMap() {
-		return dataMap;
-	}
 }

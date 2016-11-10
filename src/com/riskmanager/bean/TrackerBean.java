@@ -5,4 +5,16 @@ package com.riskmanager.bean;
  */
 public class TrackerBean {
     private String userid;
+
+    public TrackerBean(String userid) {
+        this.userid = userid;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 }

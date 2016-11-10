@@ -4,7 +4,7 @@ public class HelloWorldAction {
 	private String name;
 
     public String execute() throws Exception {
-
+        System.out.println("debug1: execute");
         if ( getName().equals("") || getName() == null )
             return "error";
 
