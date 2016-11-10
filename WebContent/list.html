@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="list.css" rel="stylesheet">
+    <title>列表</title>
+</head>
+
+<div class="row">
+    <div class="detail col-lg-4">
+        <div id="detail-panel">
+
+            <div id="risk-title" class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-tag"></span>
+                        </span>
+                <input type="text" id="detail-title" name="detail-title" class="form-control" placeholder="title">
+            </div>
+
+            <br />
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </span>
+                <div class="btn-group p-group" data-toggle="buttons">
+                    <label class="btn btn-default active" id="p-l-low" onclick="pClick(this.id);">
+                        <input type="radio" id="p-low"  class="p-btn" name="possibility-options" autocomplete="off"> 低
+                    </label>
+                    <label class="btn btn-default" id="p-l-middle" onclick="pClick(this.id);">
+                        <input type="radio" id="p-middle" class="p-btn" name="possibility-options" autocomplete="off"> 中
+                    </label>
+                    <label class="btn btn-default" id="p-l-high" onclick="pClick(this.id);" >
+                        <input type="radio" id="p-high" class="p-btn" name="possibility-options" autocomplete="off"> 高
+                    </label>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </span>
+                <div class="btn-group" data-toggle="buttons">
+                    <label id="i-l-low" onclick="iClick(this.id);" class="btn btn-default active">
+                        <input class="" type="radio" name="influence-options" autocomplete="off" checked> 低
+                    </label>
+                    <label id="i-l-middle"  onclick="iClick(this.id);"  class="btn btn-default">
+                        <input type="radio" name="influence-options" autocomplete="off"> 中
+                    </label>
+                    <label id="i-l-high"  onclick="iClick(this.id);"  class="btn btn-default">
+                        <input type="radio" name="influence-options" autocomplete="off"> 高
+                    </label>
+                </div>
+            </div>
+
+            <br />
+
+            <div id="risk-threshold" class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-flash"></span>
+                        </span>
+                <input type="text" id="detail-threshold" name="detail-threshold" class="form-control"
+                       placeholder="触发器/阈值">
+            </div>
+            <br/>
+
+            <textarea id="detail-content" name="detail-content" class="form-control" placeholder="content"></textarea>
+
+            <br />
+            <button class="btn btn-primary">保存</button>
+            <button class="btn btn-danger">删除</button>
+            <br />
+            <br />
+            <div id="creator">创建者：xxx</div>
+            <br />
+            <div id="tracker">跟踪者：xxx，xxx，xxx，xxx，xxx</div>
+        </div>
+    </div>
+
+    <div class="list col-lg-8">
+        <button class="btn btn-primary" onclick="create()"><span class="glyphicon glyphicon-pencil"></span>&nbsp;添加 </button>
+        <br />
+        <br />
+        <div id="list-panel">
+        <div class="row list-item">
+            <div class="col-sm-2">1</div>
+            <div class="col-sm-6">名字名字</div>
+            <div class="col-sm-2">可能性：高</div>
+            <div class="col-sm-2">严重度：中</div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script src="jquery-2.1.4.min.js"></script>
+<script src="list.js"></script>
+</body>
+</html>
