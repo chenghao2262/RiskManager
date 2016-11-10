@@ -7,8 +7,8 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 
 	<package name="shiyanlou" extends="struts-default,json-default">
-		<action name="hello" class="com.riskmanager.action.RiskAction" method="getAllRisk">
-			<result type='json'>
+		<action name="getRisks" class="com.riskmanager.action.RiskAction" method="getAllRisk">
+			<result type='json' name='success'>
 				<param name="root">dataMap</param>
 			</result>
 			<result name="error">/Error.jsp</result>

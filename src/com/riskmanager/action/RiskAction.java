@@ -28,7 +28,7 @@ public class RiskAction {
         System.out.println("debug execute");
         dataMap=new HashMap<>();
         dataMap.put("list",changeToRiskBean(dataBaseDAO.getAllrisk()));
-        return "SUCCESS";
+        return "success";
     }
 
     public Map<String, Object> getDataMap() {
