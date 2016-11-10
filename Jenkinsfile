@@ -13,7 +13,7 @@ node {
         sh "docker stop my || true"
         sh "docker rm my || true"
         sh "docker run --name my -p 11111:8080 -d guilhermesilveira/java8-nginx-tomcat8-mysql"
-        sh "docker cp target/RiskManager-0.0.1-SNAPSHOT.war my:/home/tomcat/webapps"
+        sh "docker cp target/RiskManager-0.0.1-SNAPSHOT.war my:/home/root/tomcat/webapps"
     }
     stage('results') {
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
