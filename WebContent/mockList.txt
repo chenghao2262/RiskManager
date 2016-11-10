@@ -1,0 +1,29 @@
+{"list":[
+	{
+		"rid":"1",
+		"riskTitle":"作业可能写不完了",
+		"riskPossibility":"低",
+		"riskInfluence":"高",
+		"threshold":"明晚",
+		"content":"明晚之前写不完就不能毕业了",
+		"creator":"qhb",
+		"tracker":[
+					{"userid":"qhb"},
+					{"userid":"ch"}
+					]
+	},
+
+	{
+		"rid":"2",
+		"riskTitle":"数据库作业爆炸",
+		"riskPossibility":"中",
+		"riskInfluence":"中",
+		"threshold":"明晚",
+		"content":"擦擦擦",
+		"creator":"qhb",
+		"tracker":[
+					{"userid":"qhb"},
+					{"userid":"ch"}
+					]
+	}
+]}

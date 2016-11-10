@@ -1,0 +1,49 @@
+.detail{
+    padding: 10px 10px;
+}
+
+.list{
+    background-color: #077777;
+    padding-top: 2%;
+    padding-bottom: 100px;
+    padding-left: 2%;
+    padding-right: 10%;
+    min-height: 1000px;
+    
+}
+
+.list-item{
+    padding: 15px 10px 15px 10px;
+    background-color: #006666;
+    margin-bottom: 10px;
+    color: #d1d0d5;
+}
+
+.list-item:hover{
+    background-color: #004444;
+    color: #f9f2f4;
+}
+
+#detail-panel{
+    position: fixed;
+    padding: 10px;
+    margin: 10% 75% 20% 1%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+@font-face {
+    font-family: gly;
+    src: url('fonts/glyphicons-halflings-regular.eot');
+url('fonts/glyphicons-halflings-regular.svg');
+url('fonts/glyphicons-halflings-regular.eot');
+url('fonts/glyphicons-halflings-regular.eot');
+
+}
+
+body{
+
+    background-color: #009966;
+}

@@ -5,10 +5,10 @@
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<package name="riskmanager" extends="struts-default">
-		<action name="hello" class="com.riskmanager.demo.HelloWorldAction"
-			method="execute">
-			<result name="success">/HelloWorld.jsp</result>
-			<result name="error">/Error.jsp</result>
+		<action name="getRisks" class="com.riskmanager.dao.DataBaseDAO" method="getAllrisk">
+			<result type="json">
+				<param name="root">dataMap</param>
+			</result>
 		</action>
 	</package>
 
