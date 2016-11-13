@@ -26,7 +26,7 @@ public class DataBaseDAO {
 	private JdbcUtils utils;
 
 	private String sql = "jdbc:mysql://59.110.10.18:3306/riskmanager?"
-			+ "user=root&password=&useUnicode=true&characterEncoding=UTF8";
+			+ "user=root&password=root&useUnicode=true&characterEncoding=UTF8";
 
 	@Resource
 	private WebContext webContext;
