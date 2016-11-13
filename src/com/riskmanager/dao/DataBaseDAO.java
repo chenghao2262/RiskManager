@@ -90,4 +90,35 @@ public class DataBaseDAO {
 
 	private List<RiskBean> list;
 
+	public void remove(int rid) {
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection=null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("Driver Load Success.");
+
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/riskmanager?"
+					+ "user=root&password=&useUnicode=true&characterEncoding=UTF8");    //创建数据库连接对象
+			System.out.println("debug:");
+			queryRunner.update(connection, "delete from risk where rid=?",new Object[]{rid});
+			queryRunner.update(connection, "delete from risk_tracker where rid=?",new Object[]{rid});
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     //加载JDBC驱动
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public RiskBean getRiskBean(int rid) {
+		return null;
+	}
 }

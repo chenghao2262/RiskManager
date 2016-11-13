@@ -23,9 +23,19 @@ public class RiskAction {
 
     @Resource
     private DataBaseDAO dataBaseDAO;
+    private int rid;
+
+
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
 
     public String getAllRisk(){
-        System.out.println("debug execute");
+        System.out.println("debug getAllRisk execute");
         dataMap=new HashMap<>();
         dataMap.put("list",changeToRiskBean(dataBaseDAO.getAllrisk()));
         return "success";
@@ -49,19 +59,20 @@ public class RiskAction {
                 if (riskBean == null || Integer.parseInt(String.valueOf(lines[0])) != riskBean.getRid()) {
                     riskBean = new RiskBean(
                             Integer.parseInt(String.valueOf(lines[0])),
-                            String.valueOf(lines[1]),
+                            Integer.parseInt(String.valueOf(lines[1])),
                             String.valueOf(lines[2]),
                             String.valueOf(lines[3]),
                             String.valueOf(lines[4]),
                             String.valueOf(lines[5]),
                             String.valueOf(lines[6]),
+                            String.valueOf(lines[7]),
                             new ArrayList<>()
                     );
 
                     arrayList.add(riskBean);
                 }else {
-                    if (lines[7]!=null){
-                        riskBean.getList().add(new TrackerBean(String.valueOf(lines[8])));
+                    if (lines[8]!=null){
+                        riskBean.getList().add(new TrackerBean(String.valueOf(lines[9])));
                     }
                 }
 
@@ -71,5 +82,18 @@ public class RiskAction {
 
 
         return  arrayList;
+    }
+
+    public String del(){
+        System.out.println("debug del execute");
+        dataMap=new HashMap<>();
+
+        RiskBean riskBean = dataBaseDAO.getRiskBean(rid);
+
+        dataBaseDAO.remove(rid);
+
+
+        dataMap.put("msg","success");
+        return "success";
     }
 }
