@@ -93,9 +93,8 @@ public class RiskBean {
     public RiskBean() {
     }
 
-    public RiskBean(int rid,int uid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator, ArrayList<TrackerBean> list) {
+    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator, ArrayList<TrackerBean> list) {
         this.rid = rid;
-        this.uid = uid;
         this.riskTitle = riskTitle;
         this.riskPossibility = riskPossibility;
         this.riskInfluence = riskInfluence;
@@ -105,9 +104,8 @@ public class RiskBean {
         this.list = list;
     }
 
-    public RiskBean(int rid,int uid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator) {
+    public RiskBean(int rid,String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator) {
         this.rid = rid;
-        this.uid=uid;
         this.riskTitle = riskTitle;
         this.riskPossibility = riskPossibility;
         this.riskInfluence = riskInfluence;

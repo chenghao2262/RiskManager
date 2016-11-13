@@ -25,6 +25,12 @@ public class DataBaseDAO {
 	@Resource
 	private JdbcUtils utils;
 
+	private String sql = "jdbc:mysql://59.110.10.18:3306/riskmanager?"
+			+ "user=root&password=&useUnicode=true&characterEncoding=UTF8";
+
+	@Resource
+	private WebContext webContext;
+
     public List<Object[]> getAllrisk() {
         // dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据
 
@@ -34,8 +40,7 @@ public class DataBaseDAO {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Driver Load Success.");
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/riskmanager?"
-                    + "user=root&password=&useUnicode=true&characterEncoding=UTF8");    //创建数据库连接对象
+            connection = DriverManager.getConnection(sql);    //创建数据库连接对象
             System.out.println("debug:");
             List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_tracker  on risk.rid=risk_tracker.rid",
                     new ArrayListHandler());
@@ -63,9 +68,7 @@ public class DataBaseDAO {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver Load Success.");
-
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/riskmanager?"
-					+ "user=root&password=&useUnicode=true&characterEncoding=UTF8");    //创建数据库连接对象
+			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
 			System.out.println("debug:");
 			UserBean userBean = queryRunner.query(connection, "select * from user where username=?",
 					new BeanHandler<>(UserBean.class),new String[]{name});
@@ -95,10 +98,7 @@ public class DataBaseDAO {
 		Connection connection=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Driver Load Success.");
-
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/riskmanager?"
-					+ "user=root&password=&useUnicode=true&characterEncoding=UTF8");    //创建数据库连接对象
+			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
 			System.out.println("debug:");
 			queryRunner.update(connection, "delete from risk where rid=?",new Object[]{rid});
 			queryRunner.update(connection, "delete from risk_tracker where rid=?",new Object[]{rid});
@@ -120,5 +120,49 @@ public class DataBaseDAO {
 
 	public RiskBean getRiskBean(int rid) {
 		return null;
+	}
+
+	public void update(int rid, String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold) {
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection=null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
+			queryRunner.update(connection, "update risk set riskTitle=?,riskPossibility=?,riskInfluence=?,threshold=?,content=?,creator=?  where rid=?",new Object[]{rid});
+			queryRunner.update(connection, "insert into risk_tracker values(?,?)?",new Object[]{rid,webContext.getCurrentUid()});
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}     //加载JDBC驱动
+		catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void insert(String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold) {
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection=null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
+			queryRunner.update(connection, "insert into risk(riskTitle,riskPossibility,riskInfluence,threshold,content) values(?,?,?,?,?)",new Object[]{riskTitle,riskPossibility,riskInfluence,content,threshold});
+			queryRunner.update(connection, "insert into risk_tracker values(last_insert_id(),?)",new Object[]{webContext.getCurrentUid()});
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}     //加载JDBC驱动
+		catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
