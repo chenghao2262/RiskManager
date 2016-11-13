@@ -128,8 +128,8 @@ public class DataBaseDAO {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
-			queryRunner.update(connection, "update risk set riskTitle=?,riskPossibility=?,riskInfluence=?,threshold=?,content=?,creator=?  where rid=?",new Object[]{rid});
-			queryRunner.update(connection, "insert into risk_tracker values(?,?)?",new Object[]{rid,webContext.getCurrentUid()});
+			queryRunner.update(connection, "update risk set riskTitle=?,riskPossibility=?,riskInfluence=?,threshold=?,content=?  where rid=?",new Object[]{riskTitle,riskPossibility,riskInfluence,threshold,content, rid});
+			queryRunner.update(connection, "insert into risk_tracker values(?,?)",new Object[]{rid,webContext.getCurrentUid()});
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}     //加载JDBC驱动
