@@ -73,13 +73,35 @@
             <textarea id="detail-content" name="detail-content" class="form-control" placeholder="内容"></textarea>
 
             <br />
-            <button class="btn btn-primary" onClick="save();">保存</button>
-            <button class="btn btn-danger" onClick="del();">删除</button>
-            <br />
-            <br />
             <div id="creator">创建者：xxx</div>
             <br />
             <div id="tracker">跟踪者：xxx，xxx，xxx，xxx，xxx</div>
+
+            <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">默认
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="#">功能</a>
+                </li>
+                <li>
+                    <a href="#">另一个功能</a>
+                </li>
+                <li>
+                    <a href="#">其他</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">分离的链接</a>
+                </li>
+            </ul>
+        </div>
+
+            <br />
+            <button class="btn btn-primary" onClick="save();">保存</button>
+            <button class="btn btn-danger" onClick="del();">删除</button>
+            <br />
         </div>
     </div>
 
