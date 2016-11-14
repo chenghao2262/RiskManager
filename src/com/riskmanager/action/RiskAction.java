@@ -61,7 +61,7 @@ public class RiskAction {
                 Object[] lines = list.get(i);
 
 
-                if (riskBean == null ||  find(Integer.parseInt(String.valueOf(lines[0])),arrayList)) {
+                if (riskBean == null ||  !find(Integer.parseInt(String.valueOf(lines[0])),arrayList)) {
                     riskBean = new RiskBean(
                             Integer.parseInt(String.valueOf(lines[0])),
                             String.valueOf(lines[1]),
