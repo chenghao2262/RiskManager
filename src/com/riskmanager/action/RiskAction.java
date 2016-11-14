@@ -61,7 +61,7 @@ public class RiskAction {
                 Object[] lines = list.get(i);
 
 
-                if (riskBean == null || Integer.parseInt(String.valueOf(lines[0])) != riskBean.getRid()) {
+                if (riskBean == null ||  find(Integer.parseInt(String.valueOf(lines[0])),arrayList)) {
                     riskBean = new RiskBean(
                             Integer.parseInt(String.valueOf(lines[0])),
                             String.valueOf(lines[1]),
@@ -86,6 +86,15 @@ public class RiskAction {
 
 
         return  arrayList;
+    }
+
+    private boolean find(int id, ArrayList<RiskBean> arrayList){
+        for (int i=0;i<arrayList.size();i++){
+            if (id==arrayList.get(i).getRid()){
+                return true;
+            }
+        }
+        return  false;
     }
 
     public String del(){
