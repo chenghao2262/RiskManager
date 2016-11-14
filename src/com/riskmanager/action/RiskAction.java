@@ -113,20 +113,29 @@ public class RiskAction {
     private String riskInfluence;
     private String content;
     private String threshold;
+    private String newTracker;
+
+    public String getNewTracker() {
+        return newTracker;
+    }
+
+    public void setNewTracker(String newTracker) {
+        this.newTracker = newTracker;
+    }
 
     public String modify(){
         dataMap=new HashMap<>();
         if (rid == -1){
             insert(riskTitle,riskPossibility,riskInfluence,content,threshold);
         }else{
-            update(rid,riskTitle,riskPossibility,riskInfluence,content,threshold);
+            update(rid,riskTitle,riskPossibility,riskInfluence,content,threshold,newTracker);
         }
         dataMap.put("msg","success");
         return "success";
     }
 
-    private void update(int rid, String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold) {
-        dataBaseDAO.update(rid,riskTitle,riskPossibility,riskInfluence,content,threshold);
+    private void update(int rid, String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold,String newTracker) {
+        dataBaseDAO.update(rid,riskTitle,riskPossibility,riskInfluence,content,threshold,newTracker);
     }
 
     private void insert(String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold) {

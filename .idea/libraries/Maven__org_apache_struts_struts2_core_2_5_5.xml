@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-core/2.5.5/struts2-core-2.5.5.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-core/2.5.5/struts2-core-2.5.5-sources.jar!/" />
     </SOURCES>
