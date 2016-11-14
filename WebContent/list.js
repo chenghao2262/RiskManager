@@ -117,7 +117,7 @@ function updateDetail(title, possibility, influence, threshold, content, creator
 }
 
 function save() {
-    alert("save");
+    //alert("save");
     var title = $("#detail-title").val();
     var content = $("#detail-content").val();
     var threshold = $("#detail-threshold").val();
