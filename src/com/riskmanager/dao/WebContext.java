@@ -31,4 +31,9 @@ public class WebContext {
         UserBean userBean = dataBaseDAO.getUserBeanByName(getUserName());
         return userBean.getId();
     }
+
+    public String getGroup() {
+        UserBean userBean = dataBaseDAO.getUserBeanByName(getUserName());
+        return userBean.getRole();
+    }
 }

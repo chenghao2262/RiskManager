@@ -129,7 +129,7 @@ public class DataBaseDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
 			queryRunner.update(connection, "update risk set riskTitle=?,riskPossibility=?,riskInfluence=?,threshold=?,content=?  where rid=?",new Object[]{riskTitle,riskPossibility,riskInfluence,threshold,content, rid});
-			queryRunner.update(connection, "insert into risk_tracker values(?,?)",new Object[]{rid,webContext.getCurrentUid()});
+			queryRunner.update(connection, "insert into risk_tracker values(?,?)",new Object[]{rid,webContext.getUserName()});
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}     //加载JDBC驱动
@@ -151,7 +151,7 @@ public class DataBaseDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
 			queryRunner.update(connection, "insert into risk(riskTitle,riskPossibility,riskInfluence,threshold,content) values(?,?,?,?,?)",new Object[]{riskTitle,riskPossibility,riskInfluence,content,threshold});
-			queryRunner.update(connection, "insert into risk_tracker values(last_insert_id(),?)",new Object[]{webContext.getCurrentUid()});
+			queryRunner.update(connection, "insert into risk_tracker values(last_insert_id(),?)",new Object[]{webContext.getUserName()});
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}     //加载JDBC驱动

@@ -3,6 +3,7 @@ package com.riskmanager.action;
 import com.riskmanager.bean.RiskBean;
 import com.riskmanager.bean.TrackerBean;
 import com.riskmanager.dao.DataBaseDAO;
+import com.riskmanager.dao.WebContext;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.taglibs.standard.tag.el.sql.UpdateTag;
@@ -24,6 +25,8 @@ public class RiskAction {
 
     @Resource
     private DataBaseDAO dataBaseDAO;
+    @Resource
+    private WebContext webContext;
     private int rid;
 
 
@@ -39,6 +42,7 @@ public class RiskAction {
         System.out.println("debug getAllRisk execute");
         dataMap=new HashMap<>();
         dataMap.put("list",changeToRiskBean(dataBaseDAO.getAllrisk()));
+        dataMap.put("group", webContext.getGroup());
         return "success";
     }
 
@@ -72,7 +76,7 @@ public class RiskAction {
                     arrayList.add(riskBean);
                 }else {
                     if (lines[7]!=null){
-                        riskBean.getList().add(new TrackerBean(String.valueOf(lines[8])));
+                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
                     }
                 }
 
