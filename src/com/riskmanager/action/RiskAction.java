@@ -69,14 +69,13 @@ public class RiskAction {
                             String.valueOf(lines[3]),
                             String.valueOf(lines[4]),
                             String.valueOf(lines[5]),
-                            String.valueOf(lines[6]),
                             new ArrayList<>()
                     );
 
                     arrayList.add(riskBean);
                 }else {
-                    if (lines[7]!=null){
-                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
+                    if (lines[6]!=null){
+                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[7])));
                     }
                 }
 
