@@ -24,7 +24,7 @@ public class RiskBean {
         this.uid = uid;
     }
 
-    private ArrayList<TrackerBean> list;
+    private ArrayList<TrackerBean> tracker;
 
     public String getRiskTitle() {
         return riskTitle;
@@ -74,12 +74,12 @@ public class RiskBean {
         this.creator = creator;
     }
 
-    public ArrayList<TrackerBean> getList() {
-        return list;
+    public ArrayList<TrackerBean> getTracker() {
+        return tracker;
     }
 
-    public void setList(ArrayList<TrackerBean> list) {
-        this.list = list;
+    public void setTracker(ArrayList<TrackerBean> tracker) {
+        this.tracker = tracker;
     }
 
     public int getRid() {
@@ -93,7 +93,7 @@ public class RiskBean {
     public RiskBean() {
     }
 
-    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator, ArrayList<TrackerBean> list) {
+    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator, ArrayList<TrackerBean> tracker) {
         this.rid = rid;
         this.riskTitle = riskTitle;
         this.riskPossibility = riskPossibility;
@@ -101,7 +101,7 @@ public class RiskBean {
         this.threshold = threshold;
         this.content = content;
         this.creator = creator;
-        this.list = list;
+        this.tracker = tracker;
     }
 
     public RiskBean(int rid,String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator) {
