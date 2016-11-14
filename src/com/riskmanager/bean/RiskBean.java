@@ -93,14 +93,13 @@ public class RiskBean {
     public RiskBean() {
     }
 
-    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator, ArrayList<TrackerBean> tracker) {
+    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, ArrayList<TrackerBean> tracker) {
         this.rid = rid;
         this.riskTitle = riskTitle;
         this.riskPossibility = riskPossibility;
         this.riskInfluence = riskInfluence;
         this.threshold = threshold;
         this.content = content;
-        this.creator = creator;
         this.tracker = tracker;
     }
 

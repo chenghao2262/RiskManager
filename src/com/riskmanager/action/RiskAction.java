@@ -61,7 +61,7 @@ public class RiskAction {
                 Object[] lines = list.get(i);
 
 
-                if (riskBean == null || Integer.parseInt(String.valueOf(lines[0])) != riskBean.getRid()) {
+                if (riskBean == null ||  !find(Integer.parseInt(String.valueOf(lines[0])),arrayList)) {
                     riskBean = new RiskBean(
                             Integer.parseInt(String.valueOf(lines[0])),
                             String.valueOf(lines[1]),
@@ -69,14 +69,13 @@ public class RiskAction {
                             String.valueOf(lines[3]),
                             String.valueOf(lines[4]),
                             String.valueOf(lines[5]),
-                            String.valueOf(lines[6]),
                             new ArrayList<>()
                     );
 
                     arrayList.add(riskBean);
                 }else {
-                    if (lines[7]!=null){
-                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
+                    if (lines[6]!=null){
+                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[7])));
                     }
                 }
 
@@ -86,6 +85,15 @@ public class RiskAction {
 
 
         return  arrayList;
+    }
+
+    private boolean find(int id, ArrayList<RiskBean> arrayList){
+        for (int i=0;i<arrayList.size();i++){
+            if (id==arrayList.get(i).getRid()){
+                return true;
+            }
+        }
+        return  false;
     }
 
     public String del(){

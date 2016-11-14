@@ -42,7 +42,7 @@ public class DataBaseDAO {
 
             connection = DriverManager.getConnection(sql);    //创建数据库连接对象
             System.out.println("debug:");
-            List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_tracker  on risk.rid=risk_tracker.rid",
+            List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_tracker  on risk.rid=risk_tracker.rid order by risk.rid",
                     new ArrayListHandler());
             return list;
         } catch (ClassNotFoundException e) {
