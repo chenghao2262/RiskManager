@@ -95,7 +95,12 @@ function updateDetail(title, possibility, influence, threshold, content, creator
     document.getElementById('creator').innerHTML = '创建者：' + creator;
     var trackerStr = "";
     $.each(trackers, function (i) {
-        trackerStr += "<badge>"+trackers[i].userid + "</badge> ";
+        if(i==0){
+
+        } else{
+
+            trackerStr += "<badge>"+trackers[i].userid + "</badge> ";
+        }
     });
     document.getElementById('tracker').innerHTML = '跟踪者：' + trackerStr;
 
