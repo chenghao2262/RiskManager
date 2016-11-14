@@ -92,7 +92,7 @@ function updateDetail(title, possibility, influence, threshold, content, creator
     $('#detail-threshold').val(threshold);
     //$('#detail-title').val(title);
     //$('#detail-title').val(title);
-    document.getElementById('creator').innerHTML = '创建者：' + trackers[0];
+    document.getElementById('creator').innerHTML = '创建者：' + creator;
     var trackerStr = "";
     $.each(trackers, function (i) {
         trackerStr += "<badge>"+trackers[i].userid + "</badge> ";
