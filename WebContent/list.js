@@ -92,7 +92,7 @@ function updateDetail(title, possibility, influence, threshold, content, creator
     $('#detail-threshold').val(threshold);
     //$('#detail-title').val(title);
     //$('#detail-title').val(title);
-    document.getElementById('creator').innerHTML = '创建者：' + creator;
+    document.getElementById('creator').innerHTML = '创建者：' + trackers[0];
     var trackerStr = "";
     $.each(trackers, function (i) {
         trackerStr += "<badge>"+trackers[i].userid + "</badge> ";
@@ -121,6 +121,7 @@ function save() {
     var title = $("#detail-title").val();
     var content = $("#detail-content").val();
     var threshold = $("#detail-threshold").val();
+    var newTracker = $("#detail-new-tracker").val();
     var influence = "";
     if (influenceId == "i-l-high") {
         influence = "高";
@@ -143,7 +144,7 @@ function save() {
         type: "post",
         url: "modify",
         data: "rid="+rid+"&riskTitle=" + title + "&riskPossibility=" + possibility + "&riskInfluence=" + influence + "&content=" + content
-        + "&threshold=" + threshold,
+        + "&threshold=" + threshold+"&newTracker="+newTracker,
         async: false
     }).responseText;
     refreshList();
@@ -163,6 +164,15 @@ function del() {
         async: false
     }).responseText;
     refreshList();
+}
+
+function getUserList(){
+    var html = $.ajax({
+        type: "post",
+        url: "modify",
+        async: false
+    }).responseText;
+
 }
 
 function setAuthentic(a){
