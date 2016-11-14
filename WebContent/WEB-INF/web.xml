@@ -26,7 +26,7 @@
     <init-param>
       <param-name>config</param-name>
       <param-value>
-				struts-default.xml,struts-plugin.xml,struts.xml
+        /WEB-INF/struts.xml
 			</param-value>
     </init-param>
   </filter>
