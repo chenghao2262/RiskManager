@@ -135,10 +135,16 @@ function updateHistory(historyList, tableId){
                         '</tr>'
     $.each(historyList, function(i){
         var item = historyList[i];
-        tableInnerHtml += makeTableRow(item.time,item.riskTitle,item.threshold,item.possibility,item.influence,item.content);
+        tableInnerHtml += makeTableRow(item.time,item.riskTitle,item.threshold,item.riskPossibility,item.riskInfluence,item.content);
     });
     document.getElementById(tableId).innerHTML=tableInnerHtml;
-    $("#"+tableId).setAttribute("visibility", "visible");
+    //if(($("#"+tableId).attr("visibility")) == "collapsed"){
+    //    $("#"+tableId).attr("visibility", "visible");
+    //    alert("open");
+    //}else{
+    //    $("#"+tableId).attr("visibility", "collapsed");
+    //    alert("close");
+    //}
 }
 
 function makeTableRow(time, title, threshold, possibility, influence, content){
