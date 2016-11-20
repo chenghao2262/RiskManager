@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>风险计划</title>
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="Plan.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><b>风险管理系统</b>&nbsp;&nbsp;&nbsp;</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">风险</a></li>
+                <li class="active"><a href="#">风险计划</a></li>
+                <li><a href="#">统计</a> </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<row>
+    <div id="plan-panel" class="col-lg-4">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </span>
+            <input type="text" id="new-plan-name" class="form-control" placeholder="计划名称">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="create();">添加计划</button>
+            </span>
+        </div><!-- /input-group -->
+        <div id="plan-list">
+
+        </div>
+    </div>
+    <div id="in-panel" class="col-lg-4">
+        <button class="btn btn-warning">移出&nbsp;<span class="glyphicon glyphicon-arrow-right"></span> </button>
+        <div id="in-list">
+
+        </div>
+    </div>
+    <div id="out-panel" class="col-lg-4">
+        <button class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;移入 </button>
+        <div class="out-list">
+
+        </div>
+    </div>
+</row>
+
+<script src="jquery-2.1.4.min.js"></script>
+<script src="Plan.js"></script>
+</body>
+</html>

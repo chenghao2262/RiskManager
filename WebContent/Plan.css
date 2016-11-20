@@ -1,0 +1,37 @@
+#plan-panel{
+    background-color: #f9f2f4;
+    padding-top: 10px;
+    min-height: 1000px;
+}
+
+body{
+
+}
+
+#in-panel{
+    background-color: #999999;
+    min-height: 1000px;
+    padding-top: 10px;
+
+}
+
+#out-panel{
+    background-color: #8c8c8c;
+    min-height: 1000px;
+    padding-top: 10px;
+
+}
+
+.my-item{
+    margin: 5px 0px 5px 0px;
+    color: #f9f2f4;
+    padding: 10px;
+    background-color: #286090;
+    text-align: center;
+    font-size: large;
+
+}
+
+.my-item:hover{
+    background-color: #337ab7;
+}
