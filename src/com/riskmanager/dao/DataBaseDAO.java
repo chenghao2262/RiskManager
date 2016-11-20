@@ -10,14 +10,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.riskmanager.bean.RiskBean;
-import com.riskmanager.bean.TrackerBean;
+import com.riskmanager.bean.*;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.dbutils.wrappers.StringTrimmedResultSet;
 import org.springframework.stereotype.Repository;
-
-import com.riskmanager.bean.UserBean;
 
 @Repository
 public class DataBaseDAO {
@@ -35,20 +35,12 @@ public class DataBaseDAO {
         // dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据
 
         QueryRunner queryRunner = new QueryRunner();
-        Connection connection=null;
+        Connection connection=utils.getConnection();
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver Load Success.");
-
-            connection = DriverManager.getConnection(sql);    //创建数据库连接对象
-            System.out.println("debug:");
-            List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_tracker  on risk.rid=risk_tracker.rid order by risk.rid",
+            List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_detail  on risk.rid=risk_tracker.rid order by risk.rid",
                     new ArrayListHandler());
             return list;
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }     //加载JDBC驱动
+        }    //加载JDBC驱动
         catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -62,22 +54,13 @@ public class DataBaseDAO {
         return null;
     }
 
-	public UserBean getUserBeanByName(String name) {
+	public List<ProjectBean> getAllProjects(){
 		QueryRunner queryRunner = new QueryRunner();
-		Connection connection=null;
+		Connection connection=utils.getConnection();
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Driver Load Success.");
-			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
-			System.out.println("debug:");
-			UserBean userBean = queryRunner.query(connection, "select * from user where username=?",
-					new BeanHandler<>(UserBean.class),new String[]{name});
-			System.out.println(userBean);
-			return userBean;
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}     //加载JDBC驱动
+			return queryRunner.query(connection, "select * from project",
+					new BeanListHandler<ProjectBean>(ProjectBean.class));
+		}    //加载JDBC驱动
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,7 +74,28 @@ public class DataBaseDAO {
 		return null;
 	}
 
-	private List<RiskBean> list;
+	public UserBean getUserBeanByName(String name) {
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection=utils.getConnection();
+		try {
+			UserBean userBean = queryRunner.query(connection, "select * from user where username=?",
+					new BeanHandler<>(UserBean.class),new String[]{name});
+			System.out.println(userBean);
+			return userBean;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 
 	public void remove(int rid) {
 		QueryRunner queryRunner = new QueryRunner();
@@ -165,4 +169,61 @@ public class DataBaseDAO {
 			}
 		}
 	}
+
+	public int insertProject(ProjectBean projectBean){
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection = utils.getConnection();
+		try {
+			queryRunner.update(connection,"insert into project(name,creator,createTime) values(?,?,?)", new Object[]{projectBean.getName(),projectBean.getCreator(),projectBean.getCreateTime()});
+			Object pid = queryRunner.query(connection,"select last_insert_id()", new ScalarHandler<>() );
+			return Integer.parseInt(String.valueOf(pid));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+
+
+
+	public int insertRisk(RiskBean riskBean){
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection = utils.getConnection();
+		try {
+			queryRunner.update(connection,"insert into risk(creator,createTime) values(?,?,?)", new Object[]{riskBean.getCreator(),riskBean.getCreateTime()});
+			Object pid = queryRunner.query(connection,"select last_insert_id()", new ScalarHandler<>() );
+			return Integer.parseInt(String.valueOf(pid));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+
+	public void insertRiskDetail(RiskDetailBean riskDetailBean){
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection = utils.getConnection();
+		try {
+			queryRunner.update(connection,"insert into risk_detail(rid,createTime,updater,riskTitle,riskPossibility,riskInfluence,threshold,content) values(?,now(),?,?,?,?,?,?)", new Object[]{riskDetailBean.getRid(),riskDetailBean.getUpdater(),riskDetailBean.getRiskTitle(),riskDetailBean.getRiskPossibility(),riskDetailBean.getRiskInfluence(),riskDetailBean.getThreshold(),riskDetailBean.getContent()});
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

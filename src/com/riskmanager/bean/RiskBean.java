@@ -8,62 +8,17 @@ import java.util.ArrayList;
  */
 public class RiskBean {
     private int rid;
-    private String riskTitle;
-    private String riskPossibility;
-    private String riskInfluence;
-    private String threshold;
-    private String content;
     private String creator;
-    private int uid;
+    private String createTime;
 
-    public int getUid() {
-        return uid;
+    private ArrayList<RiskDetailBean> details;
+
+    public int getRid() {
+        return rid;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    private ArrayList<TrackerBean> tracker;
-
-    public String getRiskTitle() {
-        return riskTitle;
-    }
-
-    public void setRiskTitle(String riskTitle) {
-        this.riskTitle = riskTitle;
-    }
-
-    public String getRiskPossibility() {
-        return riskPossibility;
-    }
-
-    public void setRiskPossibility(String riskPossibility) {
-        this.riskPossibility = riskPossibility;
-    }
-
-    public String getRiskInfluence() {
-        return riskInfluence;
-    }
-
-    public void setRiskInfluence(String riskInfluence) {
-        this.riskInfluence = riskInfluence;
-    }
-
-    public String getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(String threshold) {
-        this.threshold = threshold;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setRid(int rid) {
+        this.rid = rid;
     }
 
     public String getCreator() {
@@ -74,54 +29,31 @@ public class RiskBean {
         this.creator = creator;
     }
 
-    public ArrayList<TrackerBean> getTracker() {
-        return tracker;
+
+
+    public ArrayList<RiskDetailBean> getDetails() {
+        return details;
     }
 
-    public void setTracker(ArrayList<TrackerBean> tracker) {
-        this.tracker = tracker;
+    public void setDetails(ArrayList<RiskDetailBean> details) {
+        this.details = details;
     }
 
-    public int getRid() {
-        return rid;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setRid(int rid) {
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public RiskBean(int rid, String creator, String createTime, ArrayList<RiskDetailBean> details) {
         this.rid = rid;
+        this.creator = creator;
+        this.createTime = createTime;
+        this.details = details;
     }
 
     public RiskBean() {
-    }
-
-    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, ArrayList<TrackerBean> tracker) {
-        this.rid = rid;
-        this.riskTitle = riskTitle;
-        this.riskPossibility = riskPossibility;
-        this.riskInfluence = riskInfluence;
-        this.threshold = threshold;
-        this.content = content;
-        this.tracker = tracker;
-    }
-
-    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content,String creator, ArrayList<TrackerBean> tracker) {
-        this.rid = rid;
-        this.riskTitle = riskTitle;
-        this.riskPossibility = riskPossibility;
-        this.riskInfluence = riskInfluence;
-        this.threshold = threshold;
-        this.content = content;
-        this.creator=creator;
-        this.tracker = tracker;
-    }
-
-
-    public RiskBean(int rid, String riskTitle, String riskPossibility, String riskInfluence, String threshold, String content, String creator) {
-        this.rid = rid;
-        this.riskTitle = riskTitle;
-        this.riskPossibility = riskPossibility;
-        this.riskInfluence = riskInfluence;
-        this.threshold = threshold;
-        this.content = content;
-        this.creator = creator;
     }
 }
