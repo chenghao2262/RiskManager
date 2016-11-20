@@ -4,14 +4,14 @@
     "name":"plan1",
     "riskList":[
         {"rid":"0",
-        "riskTitle":"风险标题0"
+        "riskTitle":"椋庨櫓鏍囬0"
         }
     ]},
     {"pid":"2",
          "name":"plan2",
          "riskList":[
              {"rid":"1",
-             "riskTitle":"风险标题1"
+             "riskTitle":"椋庨櫓鏍囬1"
              }
          ]
     }
