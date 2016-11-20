@@ -1,6 +1,7 @@
 {"list":[
 	{
 		"rid":"1",
+		"time":"0000-00 00:00:00",
 		"riskTitle":"作业可能写不完了",
 		"riskPossibility":"低",
 		"riskInfluence":"高",
@@ -10,11 +11,16 @@
 		"tracker":[
 					{"userid":"qhb"},
 					{"userid":"ch"}
-					]
+					],
+		"history":[
+			{"time":"1111-11 11:11:11","riskTitle":"还是作业写不完","riskPossibility":"高","riskInfluence":"高","threshold":"后天","content":"后天必须写完作业"},
+			{"time":"1111-11 11:11:11","riskTitle":"还是作业写不完","riskPossibility":"高","riskInfluence":"高","threshold":"后天","content":"后天必须写完作业"}
+		]
 	},
 
 	{
 		"rid":"2",
+		"time":"0000-00 00:00:00",
 		"riskTitle":"数据库作业爆炸",
 		"riskPossibility":"中",
 		"riskInfluence":"中",
@@ -24,6 +30,10 @@
 		"tracker":[
 					{"userid":"qhb"},
 					{"userid":"ch"}
-					]
+					],
+		"history":[
+			{"time":"1111-11 11:11:11","riskTitle":"还是作业写不完","riskPossibility":"高","riskInfluence":"高","threshold":"后天","content":"后天必须写完作业"},
+			{"time":"1111-11 11:11:11","riskTitle":"还是作业写不完","riskPossibility":"高","riskInfluence":"高","threshold":"后天","content":"后天必须写完作业"}
+		]
 	}
 ]}

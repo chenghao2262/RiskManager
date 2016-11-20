@@ -2,6 +2,7 @@ var json;
 var rid;
 function refreshList() {
     var htmlObject = $.ajax({url: "getRisks", async: false});
+    //alert(htmlObject.responseText );
     json = JSON.parse(htmlObject.responseText);
 
     var listHtml =
@@ -11,21 +12,20 @@ function refreshList() {
     $('#list-panel').html(listHtml
     )
 }
+function mockRefreshList(){
+    var htmlObject = $.ajax({url: "mockList.txt", async: false});
+    json = JSON.parse(htmlObject.responseText);
 
-//function ajaxRespond(response){
-//    //
-//}
+    var listHtml =
+        makeItemHtml(json);
+    ;
+
+    $('#list-panel').html(listHtml
+    )
+}
 function select(index) {
 
 }
-
-//$('p-list').button();
-//$('.p-btn').on('click', function(){
-//    alert("hh")
-//});
-//$('#p-low').on('click', function(){
-//    alert("hh");
-//});
 var possibilityId;
 function pClick(id) {
     //var id = s.id;
@@ -60,11 +60,13 @@ function makeItemHtml(json) {
     $.each(list, function (i) {
         html +=
             '<div class="row list-item" id="item' + i + '" onClick="itemClick(this.id,' + i + ');">'
-            + '<div class="col-sm-2">' + (i + 1) + '</div>'
-            + '<div class="col-sm-6">' + list[i].riskTitle + '</div>'
+            + '<div class="col-sm-1">' + (i + 1) + '</div>'
+            + '<div class="col-sm-3"> 0000-00 00:00:00 </div>'
+            + '<div class="col-sm-4">' + list[i].riskTitle + '</div>'
             + '<div class="col-sm-2">可能性：' + list[i].riskPossibility + '</div>'
             + '<div class="col-sm-2">严重度：' + list[i].riskInfluence + '</div>'
-            + '</div>';
+            + '</div>' +
+            '<table class="table table-condensed" visibility="collapse" id="table'+i+'"></table>';
     });
     return html;
 }
@@ -83,7 +85,8 @@ function itemClick(id, index) {
     var trackers = item.tracker;
 
     updateDetail(title, possibility, influence, threshold, content, creator, trackers);
-
+    //alert(item);
+    updateHistory(item.history, "table"+index);
 }
 
 function updateDetail(title, possibility, influence, threshold, content, creator, trackers) {
@@ -119,6 +122,36 @@ function updateDetail(title, possibility, influence, threshold, content, creator
     } else if (influence == '低') {
         iClick('i-l-low');
     }
+}
+
+function updateHistory(historyList, tableId){
+    var tableInnerHtml = '<tr>' +
+                            '<th>'+'修改时间'+'</th>' +
+                            '<th>'+'风险名称'+'</th>'+
+                            '<th>'+'阈值'+'</th>'+
+                            '<th>'+'可能性'+'</th>'+
+                            '<th>'+'严重度'+'</th>'+
+                            '<th>'+'内容'+'</th>'+
+                        '</tr>'
+    $.each(historyList, function(i){
+        var item = historyList[i];
+        tableInnerHtml += makeTableRow(item.time,item.riskTitle,item.threshold,item.possibility,item.influence,item.content);
+    });
+    document.getElementById(tableId).innerHTML=tableInnerHtml;
+    $("#"+tableId).setAttribute("visibility", "visible");
+}
+
+function makeTableRow(time, title, threshold, possibility, influence, content){
+    var row = '<tr>' +
+        '<td>' +time+'</td>'+
+        '<td>' +title+'</td>'+
+        '<td>' +threshold+'</td>' +
+        '<td>' +possibility+'</td>'+
+        '<td>' +influence+'</td>'+
+        '<td>'+content+'</td>'+
+        '</tr>';
+
+    return row;
 }
 
 function save() {
@@ -184,4 +217,5 @@ function setAuthentic(a){
 
 }
 
-$(document).ready(refreshList);
+$(document).ready(mockRefreshList);
+//$(document).ready(refreshList);
