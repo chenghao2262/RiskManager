@@ -76,8 +76,9 @@ public class RiskAction {
                     arrayList.add(riskBean);
                     if (lines[7]!=null){
                         riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
+                        continue;
                     }
-                    continue;
+
                 }else {
                     if (lines[7]!=null){
                         riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
