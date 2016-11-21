@@ -8,10 +8,19 @@ import java.util.ArrayList;
  */
 public class RiskBean {
     private int rid;
+    private int pid;
     private String creator;
     private String createTime;
 
     private ArrayList<RiskDetailBean> details;
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
 
     public int getRid() {
         return rid;
@@ -29,7 +38,13 @@ public class RiskBean {
         this.creator = creator;
     }
 
-
+    public RiskBean(int rid, int pid, String creator, String createTime, ArrayList<RiskDetailBean> details) {
+        this.rid = rid;
+        this.pid = pid;
+        this.creator = creator;
+        this.createTime = createTime;
+        this.details = details;
+    }
 
     public ArrayList<RiskDetailBean> getDetails() {
         return details;

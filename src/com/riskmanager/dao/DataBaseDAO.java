@@ -165,21 +165,22 @@ public class DataBaseDAO {
 
         RiskBean riskBean = new RiskBean();
         riskBean.setRid(Integer.parseInt(String.valueOf(objects[0])));
-        riskBean.setCreateTime(String.valueOf(objects[1]));
-        riskBean.setCreator(String.valueOf(objects[2]));
+        riskBean.setPid(Integer.parseInt(String.valueOf(objects[1])));
+        riskBean.setCreateTime(String.valueOf(objects[2]));
+        riskBean.setCreator(String.valueOf(objects[3]));
         riskBean.setDetails(new ArrayList<>());
         for (int i=0;i<lists.size();i++){
             Object[] rds = lists.get(i);
             RiskDetailBean riskDetailBean = new RiskDetailBean();
-            riskDetailBean.setRid(Integer.parseInt(String.valueOf(rds[3])));
-            riskDetailBean.setRdid(Integer.parseInt(String.valueOf(rds[4])));
-            riskDetailBean.setUpdateTime(String.valueOf(rds[5]));
-            riskDetailBean.setUpdater(String.valueOf(rds[6]));
-            riskDetailBean.setRiskTitle(String.valueOf(rds[7]));
-            riskDetailBean.setRiskPossibility(String.valueOf(rds[8]));
-            riskDetailBean.setRiskInfluence(String.valueOf(rds[9]));
-            riskDetailBean.setThreshold(String.valueOf(rds[10]));
-            riskDetailBean.setContent(String.valueOf(rds[11]));
+            riskDetailBean.setRid(Integer.parseInt(String.valueOf(rds[4])));
+            riskDetailBean.setRdid(Integer.parseInt(String.valueOf(rds[5])));
+            riskDetailBean.setUpdateTime(String.valueOf(rds[6]));
+            riskDetailBean.setUpdater(String.valueOf(rds[7]));
+            riskDetailBean.setRiskTitle(String.valueOf(rds[8]));
+            riskDetailBean.setRiskPossibility(String.valueOf(rds[9]));
+            riskDetailBean.setRiskInfluence(String.valueOf(rds[10]));
+            riskDetailBean.setThreshold(String.valueOf(rds[11]));
+            riskDetailBean.setContent(String.valueOf(rds[12]));
             riskBean.getDetails().add(riskDetailBean);
         }
 
@@ -195,23 +196,24 @@ public class DataBaseDAO {
             if (riskBean==null || riskBean.getRid() != rid){
                 riskBean = new RiskBean();
                 riskBean.setRid(rid);
-                riskBean.setCreateTime(String.valueOf(objects[1]));
-                riskBean.setCreator(String.valueOf(objects[2]));
+                riskBean.setPid(Integer.parseInt(String.valueOf(objects[1])));
+                riskBean.setCreateTime(String.valueOf(objects[2]));
+                riskBean.setCreator(String.valueOf(objects[3]));
                 riskBean.setDetails(new ArrayList<>());
                 arrayList.add(riskBean);
             }
 
             Object[] rds = lists.get(i);
             RiskDetailBean riskDetailBean = new RiskDetailBean();
-            riskDetailBean.setRid(Integer.parseInt(String.valueOf(rds[3])));
-            riskDetailBean.setRdid(Integer.parseInt(String.valueOf(rds[4])));
-            riskDetailBean.setUpdateTime(String.valueOf(rds[5]));
-            riskDetailBean.setUpdater(String.valueOf(rds[6]));
-            riskDetailBean.setRiskTitle(String.valueOf(rds[7]));
-            riskDetailBean.setRiskPossibility(String.valueOf(rds[8]));
-            riskDetailBean.setRiskInfluence(String.valueOf(rds[9]));
-            riskDetailBean.setThreshold(String.valueOf(rds[10]));
-            riskDetailBean.setContent(String.valueOf(rds[11]));
+            riskDetailBean.setRid(Integer.parseInt(String.valueOf(rds[4])));
+            riskDetailBean.setRdid(Integer.parseInt(String.valueOf(rds[5])));
+            riskDetailBean.setUpdateTime(String.valueOf(rds[6]));
+            riskDetailBean.setUpdater(String.valueOf(rds[7]));
+            riskDetailBean.setRiskTitle(String.valueOf(rds[8]));
+            riskDetailBean.setRiskPossibility(String.valueOf(rds[9]));
+            riskDetailBean.setRiskInfluence(String.valueOf(rds[10]));
+            riskDetailBean.setThreshold(String.valueOf(rds[11]));
+            riskDetailBean.setContent(String.valueOf(rds[12]));
             riskBean.getDetails().add(riskDetailBean);
         }
 
