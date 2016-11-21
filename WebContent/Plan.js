@@ -51,7 +51,7 @@ function getInList(pid){
     updateOut(inRidList);
 }
 function updateOut(inRidList){
-    var htmlObject = $.ajax({url: "mockList.txt", async: false});
+    var htmlObject = $.ajax({url: "getRisks", async: false});
     var all = JSON.parse(htmlObject.responseText).list;
     var outHtml = '';
     var outIndex = 1;

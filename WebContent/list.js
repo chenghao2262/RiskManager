@@ -13,7 +13,7 @@ function refreshList() {
     )
 }
 function mockRefreshList(){
-    var htmlObject = $.ajax({url: "mockList.txt", async: false});
+    var htmlObject = $.ajax({url: "getRisks", async: false});
     json = JSON.parse(htmlObject.responseText);
 
     var listHtml =
