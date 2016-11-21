@@ -54,6 +54,29 @@ public class DataBaseDAO {
         return null;
     }
 
+	public List<Object[]> getAllrisk(int pid) {
+		// dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据
+
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection=utils.getConnection();
+		try {
+			List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_detail  on risk.rid=risk_tracker.rid  where risk.pid=? order by risk.rid",
+					new ArrayListHandler(),pid);
+			return list;
+		}    //加载JDBC驱动
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 	public List<ProjectBean> getAllProjects(){
 		QueryRunner queryRunner = new QueryRunner();
 		Connection connection=utils.getConnection();
