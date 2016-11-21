@@ -14,6 +14,10 @@ public class RiskBean {
 
     private ArrayList<RiskDetailBean> details;
 
+
+    public String getTitle(){
+        return "";
+    }
     public int getPid() {
         return pid;
     }
