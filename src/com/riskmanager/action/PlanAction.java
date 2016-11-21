@@ -19,4 +19,8 @@ public class PlanAction {
     public String getPlans(){
         return "success";
     }
+
+    public String createPlan(){
+        return "success";
+    }
 }

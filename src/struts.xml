@@ -31,6 +31,24 @@
 			</result>
 			<result name="error">/Error.jsp</result>
 		</action>
+		<action name="createPlan" class="com.riskmanager.action.PlanAction" method="createPlan">
+			<result type='json' name='success'>
+				<param name="root">dataMap</param>
+			</result>
+			<result name="error">/Error.jsp</result>
+		</action>
+		<action name="delRisk" class="com.riskmanager.action.RiskAction" method="delRisk">
+			<result type='json' name='success'>
+				<param name="root">dataMap</param>
+			</result>
+			<result name="error">/Error.jsp</result>
+		</action>
+		<action name="importRisk" class="com.riskmanager.action.RiskAction" method="importRisk">
+			<result type='json' name='success'>
+				<param name="root">dataMap</param>
+			</result>
+			<result name="error">/Error.jsp</result>
+		</action>
 	</package>
 
 </struts>

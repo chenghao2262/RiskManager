@@ -79,14 +79,14 @@ function riskOut(self, rid){
     //$("#out-list").html(originHtml+self.outerHTML);
     //$(self).attr("onClick", "riskIn(this")
     //self.outerHTML = '';
-    $.ajax({url:"#", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
+    $.ajax({url:"delRisk", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
     getInList(pidSelected);
 }
 
 //将风险移入计划
 function riskIn(self, rid){
 
-    $.ajax({url:"#", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
+    $.ajax({url:"importRisk", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
     getInList(pidSelected);
 }
 function getOutList(pid){
@@ -96,7 +96,7 @@ function getOutList(pid){
 function create(){
     var name = $("#new-plan-name").val();
 
-    $.ajax({url:"#", async:false, data:"name="+name, type:"post"});
+    $.ajax({url:"createPlan", async:false, data:"name="+name, type:"post"});
     getPlanList();
 }
 
