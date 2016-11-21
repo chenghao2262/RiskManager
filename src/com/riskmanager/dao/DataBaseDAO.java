@@ -31,7 +31,7 @@ public class DataBaseDAO {
 	@Resource
 	private WebContext webContext;
 
-    public List<Object[]> getAllrisk() {
+    public ArrayList<RiskBean> getAllrisk() {
         // dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据
 
         QueryRunner queryRunner = new QueryRunner();
@@ -39,7 +39,7 @@ public class DataBaseDAO {
         try {
             List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_detail  on risk.rid=risk_tracker.rid order by risk.rid",
                     new ArrayListHandler());
-            return list;
+            return changeToAllRiskBean(list);
         }    //加载JDBC驱动
         catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -54,7 +54,7 @@ public class DataBaseDAO {
         return null;
     }
 
-	public List<Object[]> getAllrisk(int pid) {
+	public ArrayList<RiskBean> getAllrisk(int pid) {
 		// dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据
 
 		QueryRunner queryRunner = new QueryRunner();
@@ -62,7 +62,7 @@ public class DataBaseDAO {
 		try {
 			List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_detail  on risk.rid=risk_tracker.rid  where risk.pid=? order by risk.rid",
 					new ArrayListHandler(),pid);
-			return list;
+			return changeToAllRiskBean(list);
 		}    //加载JDBC驱动
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -124,14 +124,8 @@ public class DataBaseDAO {
 		QueryRunner queryRunner = new QueryRunner();
 		Connection connection=null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
-			System.out.println("debug:");
+			connection = utils.getConnection();    //创建数据库连接对象
 			queryRunner.update(connection, "delete from risk where rid=?",new Object[]{rid});
-			queryRunner.update(connection, "delete from risk_tracker where rid=?",new Object[]{rid});
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}     //加载JDBC驱动
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -146,8 +140,83 @@ public class DataBaseDAO {
 	}
 
 	public RiskBean getRiskBean(int rid) {
+		QueryRunner queryRunner = new QueryRunner();
+		Connection connection=null;
+		try {
+			connection = utils.getConnection();    //创建数据库连接对象
+			return changeToRiskBean(queryRunner.query(connection,"select * from risk,risk_detail where risk.rid=risk_detail.rid and risk.rid=?",new ArrayListHandler(),rid));
+		}     //加载JDBC驱动
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 		return null;
 	}
+
+	private RiskBean changeToRiskBean(List<Object[]> lists){
+        Object[] objects = lists.get(0);
+
+        RiskBean riskBean = new RiskBean();
+        riskBean.setRid(Integer.parseInt(String.valueOf(objects[0])));
+        riskBean.setCreateTime(String.valueOf(objects[1]));
+        riskBean.setCreator(String.valueOf(objects[2]));
+        riskBean.setDetails(new ArrayList<>());
+        for (int i=0;i<lists.size();i++){
+            Object[] rds = lists.get(i);
+            RiskDetailBean riskDetailBean = new RiskDetailBean();
+            riskDetailBean.setRid(Integer.parseInt(String.valueOf(rds[3])));
+            riskDetailBean.setRdid(Integer.parseInt(String.valueOf(rds[4])));
+            riskDetailBean.setUpdateTime(String.valueOf(rds[5]));
+            riskDetailBean.setUpdater(String.valueOf(rds[6]));
+            riskDetailBean.setRiskTitle(String.valueOf(rds[7]));
+            riskDetailBean.setRiskPossibility(String.valueOf(rds[8]));
+            riskDetailBean.setRiskInfluence(String.valueOf(rds[9]));
+            riskDetailBean.setThreshold(String.valueOf(rds[10]));
+            riskDetailBean.setContent(String.valueOf(rds[11]));
+            riskBean.getDetails().add(riskDetailBean);
+        }
+
+		return riskBean;
+	}
+
+    private ArrayList<RiskBean> changeToAllRiskBean(List<Object[]> lists){
+        ArrayList<RiskBean> arrayList = new ArrayList<>();
+        RiskBean riskBean = null;
+        for (int i=0;i<lists.size();i++){
+            Object[] objects = lists.get(i);
+            int rid = Integer.parseInt(String.valueOf(objects[0]));
+            if (riskBean==null || riskBean.getRid() != rid){
+                riskBean = new RiskBean();
+                riskBean.setRid(rid);
+                riskBean.setCreateTime(String.valueOf(objects[1]));
+                riskBean.setCreator(String.valueOf(objects[2]));
+                riskBean.setDetails(new ArrayList<>());
+                arrayList.add(riskBean);
+            }
+
+            Object[] rds = lists.get(i);
+            RiskDetailBean riskDetailBean = new RiskDetailBean();
+            riskDetailBean.setRid(Integer.parseInt(String.valueOf(rds[3])));
+            riskDetailBean.setRdid(Integer.parseInt(String.valueOf(rds[4])));
+            riskDetailBean.setUpdateTime(String.valueOf(rds[5]));
+            riskDetailBean.setUpdater(String.valueOf(rds[6]));
+            riskDetailBean.setRiskTitle(String.valueOf(rds[7]));
+            riskDetailBean.setRiskPossibility(String.valueOf(rds[8]));
+            riskDetailBean.setRiskInfluence(String.valueOf(rds[9]));
+            riskDetailBean.setThreshold(String.valueOf(rds[10]));
+            riskDetailBean.setContent(String.valueOf(rds[11]));
+            riskBean.getDetails().add(riskDetailBean);
+        }
+
+        return arrayList;
+    }
 
 	public void update(int rid, String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold, String newTracker) {
 		QueryRunner queryRunner = new QueryRunner();
