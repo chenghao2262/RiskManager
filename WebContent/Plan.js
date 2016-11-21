@@ -4,7 +4,7 @@
 var pidSelected;
 var planList;
 function getPlanList(){
-    var htmlObject = $.ajax({url: "planResponse.txt", async: false});
+    var htmlObject = $.ajax({url: "getPlans", async: false});
     planList = JSON.parse(htmlObject.responseText);
 
     var listHtml = makePlanItemHtml(planList.list);

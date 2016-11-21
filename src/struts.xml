@@ -25,6 +25,12 @@
 			</result>
 			<result name="error">/Error.jsp</result>
 		</action>
+		<action name="getPlans" class="com.riskmanager.action.PlanAction" method="getPlans">
+			<result type='json' name='success'>
+				<param name="root">dataMap</param>
+			</result>
+			<result name="error">/Error.jsp</result>
+		</action>
 	</package>
 
 </struts>

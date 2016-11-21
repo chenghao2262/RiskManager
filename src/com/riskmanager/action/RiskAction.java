@@ -61,29 +61,29 @@ public class RiskAction {
                 Object[] lines = list.get(i);
 
 
-                if (riskBean == null ||  !find(Integer.parseInt(String.valueOf(lines[0])),arrayList)) {
-                    riskBean = new RiskBean(
-                            Integer.parseInt(String.valueOf(lines[0])),
-                            String.valueOf(lines[1]),
-                            String.valueOf(lines[2]),
-                            String.valueOf(lines[3]),
-                            String.valueOf(lines[4]),
-                            String.valueOf(lines[5]),
-                            String.valueOf(lines[6]),
-                            new ArrayList<>()
-                    );
-
-                    arrayList.add(riskBean);
-                    if (lines[7]!=null){
-                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
-                        continue;
-                    }
-
-                }else {
-                    if (lines[7]!=null){
-                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
-                    }
-                }
+//                if (riskBean == null ||  !find(Integer.parseInt(String.valueOf(lines[0])),arrayList)) {
+//                    riskBean = new RiskBean(
+//                            Integer.parseInt(String.valueOf(lines[0])),
+//                            String.valueOf(lines[1]),
+//                            String.valueOf(lines[2]),
+//                            String.valueOf(lines[3]),
+//                            String.valueOf(lines[4]),
+//                            String.valueOf(lines[5]),
+//                            String.valueOf(lines[6]),
+//                            new ArrayList<>()
+//                    );
+//
+//                    arrayList.add(riskBean);
+//                    if (lines[7]!=null){
+//                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
+//                        continue;
+//                    }
+//
+//                }else {
+//                    if (lines[7]!=null){
+//                        riskBean.getTracker().add(new TrackerBean(String.valueOf(lines[8])));
+//                    }
+//                }
 
                 i++;
             }
