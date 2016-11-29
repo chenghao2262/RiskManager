@@ -1,6 +1,7 @@
 package com.riskmanager.action;
 
 import com.riskmanager.bean.RiskBean;
+import com.riskmanager.bean.RiskDetailBean;
 import com.riskmanager.bean.TrackerBean;
 import com.riskmanager.dao.DataBaseDAO;
 import com.riskmanager.dao.WebContext;
@@ -41,7 +42,7 @@ public class RiskAction {
     public String getAllRisk(){
         System.out.println("debug getAllRisk execute");
         dataMap=new HashMap<>();
-        dataMap.put("list",changeToRiskBean(dataBaseDAO.getAllrisk()));
+        dataMap.put("list",dataBaseDAO.getAllrisk());
         dataMap.put("group", webContext.getGroup());
         return "success";
     }
@@ -130,21 +131,21 @@ public class RiskAction {
 
     public String modify(){
         dataMap=new HashMap<>();
+        RiskDetailBean riskDetailBean = new RiskDetailBean();
+
         if (rid == -1){
-            insert(riskTitle,riskPossibility,riskInfluence,content,threshold);
-        }else{
-            update(rid,riskTitle,riskPossibility,riskInfluence,content,threshold,newTracker);
+            rid = dataBaseDAO.insertRisk(new RiskBean(webContext.getUserName()));
         }
+        riskDetailBean.setRid(rid);
+        riskDetailBean.setContent(content);
+        riskDetailBean.setRiskInfluence(riskInfluence);
+        riskDetailBean.setThreshold(threshold);
+        riskDetailBean.setRiskPossibility(riskPossibility);
+        riskDetailBean.setUpdater(webContext.getUserName());
+        riskDetailBean.setRiskTitle(riskTitle);
+        dataBaseDAO.insertRiskDetail(riskDetailBean);
         dataMap.put("msg","success");
         return "success";
-    }
-
-    private void update(int rid, String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold,String newTracker) {
-        dataBaseDAO.update(rid,riskTitle,riskPossibility,riskInfluence,content,threshold,newTracker);
-    }
-
-    private void insert(String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold) {
-        dataBaseDAO.insert(riskTitle,riskPossibility,riskInfluence,content,threshold);
     }
 
     public String getRiskTitle() {

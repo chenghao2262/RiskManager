@@ -1,5 +1,7 @@
 package com.riskmanager.bean;
 
+import java.util.List;
+
 /**
  * Created by chenghao on 2016/11/20.
  */
@@ -8,6 +10,24 @@ public class ProjectBean {
     private String name;
     private String creator;
     private String createTime;
+
+    private List<RiskBean> riskBeen;
+
+    public List<RiskBean> getRiskBeen() {
+        return riskBeen;
+    }
+
+    public void setRiskBeen(List<RiskBean> riskBeen) {
+        this.riskBeen = riskBeen;
+    }
+
+    public ProjectBean(int pid, String name, String creator, String createTime, List<RiskBean> riskBeen) {
+        this.pid = pid;
+        this.name = name;
+        this.creator = creator;
+        this.createTime = createTime;
+        this.riskBeen = riskBeen;
+    }
 
     public int getPid() {
         return pid;

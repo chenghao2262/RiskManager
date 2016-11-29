@@ -220,55 +220,50 @@ public class DataBaseDAO {
         return arrayList;
     }
 
-	public void update(int rid, String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold, String newTracker) {
-		QueryRunner queryRunner = new QueryRunner();
-		Connection connection=null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
-			queryRunner.update(connection, "update risk set riskTitle=?,riskPossibility=?,riskInfluence=?,threshold=?,content=?  where rid=?",new Object[]{riskTitle,riskPossibility,riskInfluence,threshold,content, rid});
-			queryRunner.update(connection, "insert into risk_tracker values(?,?)",new Object[]{rid,newTracker});
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}     //加载JDBC驱动
-		catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void insert(String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold) {
-		QueryRunner queryRunner = new QueryRunner();
-		Connection connection=null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(sql);    //创建数据库连接对象
-			queryRunner.update(connection, "insert into risk(riskTitle,riskPossibility,riskInfluence,threshold,content,creator) values(?,?,?,?,?,?)",new Object[]{riskTitle,riskPossibility,riskInfluence,content,threshold,webContext.getUserName()});
-			queryRunner.update(connection, "insert into risk_tracker values(last_insert_id(),?)",new Object[]{webContext.getUserName()});
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}     //加载JDBC驱动
-		catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+//	public void update(int rid, String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold, String newTracker) {
+//		QueryRunner queryRunner = new QueryRunner();
+//		Connection connection=null;
+//		try {
+//
+//			connection = utils.getConnection();    //创建数据库连接对象
+//			queryRunner.update(connection, "update risk set riskTitle=?,riskPossibility=?,riskInfluence=?,threshold=?,content=?  where rid=?",new Object[]{riskTitle,riskPossibility,riskInfluence,threshold,content, rid});
+//			queryRunner.update(connection, "insert into risk_tracker values(?,?)",new Object[]{rid,newTracker});
+//		}     //加载JDBC驱动
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				connection.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+//
+//	public void insert(String riskTitle, String riskPossibility, String riskInfluence, String content, String threshold) {
+//		QueryRunner queryRunner = new QueryRunner();
+//		Connection connection=null;
+//		try {
+//			connection = utils.getConnection();    //创建数据库连接对象
+//			queryRunner.update(connection, "insert into risk(riskTitle,riskPossibility,riskInfluence,threshold,content,creator) values(?,?,?,?,?,?)",new Object[]{riskTitle,riskPossibility,riskInfluence,content,threshold,webContext.getUserName()});
+//			queryRunner.update(connection, "insert into risk_tracker values(last_insert_id(),?)",new Object[]{webContext.getUserName()});
+//		}     //加载JDBC驱动
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				connection.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
 	public int insertProject(ProjectBean projectBean){
 		QueryRunner queryRunner = new QueryRunner();
 		Connection connection = utils.getConnection();
 		try {
-			queryRunner.update(connection,"insert into project(name,creator,createTime) values(?,?,?)", new Object[]{projectBean.getName(),projectBean.getCreator(),projectBean.getCreateTime()});
+			queryRunner.update(connection,"insert into project(name,creator,createTime) values(?,?,now())", new Object[]{projectBean.getName(),projectBean.getCreator(),projectBean.getCreateTime()});
 			Object pid = queryRunner.query(connection,"select last_insert_id()", new ScalarHandler<>() );
 			return Integer.parseInt(String.valueOf(pid));
 		} catch (SQLException e) {
@@ -289,7 +284,7 @@ public class DataBaseDAO {
 		QueryRunner queryRunner = new QueryRunner();
 		Connection connection = utils.getConnection();
 		try {
-			queryRunner.update(connection,"insert into risk(creator,createTime) values(?,?,?)", new Object[]{riskBean.getCreator(),riskBean.getCreateTime()});
+			queryRunner.update(connection,"insert into risk(creator,createTime) values(?,now())", new Object[]{riskBean.getCreator()});
 			Object pid = queryRunner.query(connection,"select last_insert_id()", new ScalarHandler<>() );
 			return Integer.parseInt(String.valueOf(pid));
 		} catch (SQLException e) {

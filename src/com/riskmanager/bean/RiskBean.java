@@ -14,6 +14,10 @@ public class RiskBean {
 
     private ArrayList<RiskDetailBean> details;
 
+    public RiskBean(String userName) {
+        this.creator=userName;
+    }
+
 
     public String getTitle(){
         return "";
