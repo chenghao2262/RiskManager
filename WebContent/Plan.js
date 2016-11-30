@@ -75,7 +75,7 @@ function updateOutSelected(of, candidate, inRidList){
             }
         }
         if(!isIn){
-            outHtml += '<div class="row my-item" onClick="javascript:riskIn(this,'+candidate[i].rid+');">'+
+            outHtml += '<div class="row my-item" onClick="javascript:riskIn(this,'+candidate.rid[i]+');">'+
                 '<div class="col-sm-2">'+outIndex+'</div>'+'' +
                 '<div class="col-sm-10">'+candidate.data.labels[i]+'</div>'+
                     //'<div class="col-sm-2"><span class="badge" style="background-color: #00C1B3">'+all[i].distinguished+'</span></div>'+
