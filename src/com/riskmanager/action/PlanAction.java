@@ -38,7 +38,7 @@ public class PlanAction {
             list.get(i).setRiskBeen(dataBaseDAO.getAllrisk(list.get(i).getPid()));
         }
 
-        dataMap.put("list",list);
+        dataMap.put("list",changeToPlanVO(list));
 
         return "success";
     }
@@ -55,7 +55,7 @@ public class PlanAction {
 
             planVO.setName(projectBean.getName());
 
-            planVO.setRiskList(RiskAction.changeToRiskVos(dataBaseDAO.getAllrisk(projectBean.getPid())));
+            planVO.setRiskList(RiskAction.changeToRiskVos(projectBean.getRiskBeen()));
 
             returnList.add(planVO);
         }
