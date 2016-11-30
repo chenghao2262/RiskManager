@@ -32,6 +32,7 @@ function planSelect(id){
 }
 
 function getInList(pid){
+	getPlanList();
     var list = planList.list;
     var html = '';
     var inRidList = new Array();
