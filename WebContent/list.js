@@ -61,7 +61,7 @@ function makeItemHtml(json) {
         html +=
             '<div class="row list-item" id="item' + i + '" onClick="itemClick(this.id,' + i + ');">'
             + '<div class="col-sm-1">' + (i + 1) + '</div>'
-            + '<div class="col-sm-3"> 0000-00 00:00:00 </div>'
+            + '<div class="col-sm-3"> '+list[i].time+' </div>'
             + '<div class="col-sm-4">' + list[i].riskTitle + '</div>'
             + '<div class="col-sm-2">可能性：' + list[i].riskPossibility + '</div>'
             + '<div class="col-sm-2">严重度：' + list[i].riskInfluence + '</div>'
@@ -82,14 +82,14 @@ function itemClick(id, index) {
     var content = item.content;
     var threshold = item.threshold;
     var creator = item.creator;
-    var trackers = item.tracker;
+    var history = item.history;
 
-    updateDetail(title, possibility, influence, threshold, content, creator, trackers);
+    updateDetail(title, possibility, influence, threshold, content, creator, history);
     //alert(item);
     updateHistory(item.history, "table"+index);
 }
 
-function updateDetail(title, possibility, influence, threshold, content, creator, trackers) {
+function updateDetail(title, possibility, influence, threshold, content, creator, history) {
     $('#detail-title').val(title);
     $('#detail-content').val(content);
     $('#detail-threshold').val(threshold);
@@ -97,13 +97,8 @@ function updateDetail(title, possibility, influence, threshold, content, creator
     //$('#detail-title').val(title);
     document.getElementById('creator').innerHTML = '创建者：' + creator;
     var trackerStr = "";
-    $.each(trackers, function (i) {
-        if(i==0){
-
-        } else{
-
-            trackerStr += "<badge>"+trackers[i].userid + "</badge> ";
-        }
+    $.each(history, function (i) {
+        trackerStr+=history[i].userid;
     });
     document.getElementById('tracker').innerHTML = '跟踪者：' + trackerStr;
 
