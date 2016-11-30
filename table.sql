@@ -37,3 +37,4 @@ SELECT * FROM (select r1.*,t.times from
   (select risk.rid,count(risk_detail.rid) as times from risk left join risk_detail  on risk.rid=risk_detail.rid group by risk.rid order by risk.rid) as t,risk r1
     WHERE r1.rid=t.rid) as t2 LEFT JOIN risk_detail ON t2.rid=risk_detail.rid
 
+select * from project;

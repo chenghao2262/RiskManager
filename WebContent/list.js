@@ -223,5 +223,5 @@ function setAuthentic(a){
 
 }
 
-$(document).ready(mockRefreshList);
-//$(document).ready(refreshList);
+//$(document).ready(mockRefreshList);
+$(document).ready(refreshList);
