@@ -304,7 +304,7 @@ public class DataBaseDAO {
 		QueryRunner queryRunner = new QueryRunner();
 		Connection connection = utils.getConnection();
 		try {
-			queryRunner.update(connection,"insert into project(name,creator,createTime) values(?,?,now())", new Object[]{projectBean.getName(),projectBean.getCreator(),projectBean.getCreateTime()});
+			queryRunner.update(connection,"insert into project(name,creator,createTime) values(?,?,now())", new Object[]{projectBean.getName(),projectBean.getCreator()});
 			Object pid = queryRunner.query(connection,"select last_insert_id()", new ScalarHandler<>() );
 			return Integer.parseInt(String.valueOf(pid));
 		} catch (SQLException e) {
@@ -345,7 +345,7 @@ public class DataBaseDAO {
 		QueryRunner queryRunner = new QueryRunner();
 		Connection connection = utils.getConnection();
 		try {
-			queryRunner.update(connection,"insert into risk_detail(rid,createTime,updater,riskTitle,riskPossibility,riskInfluence,threshold,content) values(?,now(),?,?,?,?,?,?)", new Object[]{riskDetailBean.getRid(),riskDetailBean.getUpdater(),riskDetailBean.getRiskTitle(),riskDetailBean.getRiskPossibility(),riskDetailBean.getRiskInfluence(),riskDetailBean.getThreshold(),riskDetailBean.getContent()});
+			queryRunner.update(connection,"insert into risk_detail(rid,updateTime,updater,riskTitle,riskPossibility,riskInfluence,threshold,content) values(?,now(),?,?,?,?,?,?)", new Object[]{riskDetailBean.getRid(),riskDetailBean.getUpdater(),riskDetailBean.getRiskTitle(),riskDetailBean.getRiskPossibility(),riskDetailBean.getRiskInfluence(),riskDetailBean.getThreshold(),riskDetailBean.getContent()});
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

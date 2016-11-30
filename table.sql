@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS project;
 CREATE TABLE IF NOT EXISTS project(
   pid INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(356),
-  creator INTEGER NOT NULL,
+  name VARCHAR(256),
+  creator VARCHAR(256),
   createTime DATETIME
 );
 
@@ -33,8 +33,3 @@ CREATE TABLE IF NOT EXISTS risk_detail(
   content VARCHAR(256) NOT NULL
 );
 
-SELECT * FROM (select r1.*,t.times from
-  (select risk.rid,count(risk_detail.rid) as times from risk left join risk_detail  on risk.rid=risk_detail.rid group by risk.rid order by risk.rid) as t,risk r1
-    WHERE r1.rid=t.rid) as t2 LEFT JOIN risk_detail ON t2.rid=risk_detail.rid
-
-select * from project;
