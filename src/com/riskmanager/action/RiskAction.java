@@ -250,6 +250,10 @@ public class RiskAction {
     public String distinguished(){
         dataMap = new HashMap<>();
         List<Object[]> objects = dataBaseDAO.getYinyong();
+        changeToDataMap(objects,dataMap);
+         return "success";
+    }
+    private Map<String,Object> changeToDataMap(List<Object[]> objects,Map<String,Object> dataMap){
         List<String> labels = new ArrayList<>();
         List<Integer> data = new ArrayList<>();
         List<Integer> rids = new ArrayList<>();
@@ -276,6 +280,12 @@ public class RiskAction {
         totalData.put("datasets",datasets);
         dataMap.put("data",totalData);
         dataMap.put("rid",rids);
-         return "success";
+        return totalData;
+    }
+    public String problem(){
+        dataMap = new HashMap<>();
+        List<Object[]> objects = dataBaseDAO.getUpdateTimes();
+        changeToDataMap(objects,dataMap);
+        return "success";
     }
 }
