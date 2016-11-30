@@ -48,7 +48,7 @@ public class RiskAction {
         return "success";
     }
 
-    public List<RiskVO> changeToRiskVos(List<RiskBean> list){
+    public static List<RiskVO> changeToRiskVos(List<RiskBean> list){
         List<RiskVO> returnList= new ArrayList<>();
 
         for (int i=0;i<list.size();i++){

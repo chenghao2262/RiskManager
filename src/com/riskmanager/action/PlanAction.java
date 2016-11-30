@@ -1,5 +1,6 @@
 package com.riskmanager.action;
 
+import com.riskmanager.bean.PlanVO;
 import com.riskmanager.bean.ProjectBean;
 import com.riskmanager.bean.RiskBean;
 import com.riskmanager.dao.DataBaseDAO;
@@ -40,6 +41,26 @@ public class PlanAction {
         dataMap.put("list",list);
 
         return "success";
+    }
+
+    public  List<PlanVO> changeToPlanVO(List<ProjectBean> list){
+        List<PlanVO> returnList = new ArrayList<>();
+
+        for (int i=0;i<list.size();i++){
+            ProjectBean projectBean = list.get(i);
+
+            PlanVO planVO = new PlanVO();
+
+            planVO.setPid(projectBean.getPid());
+
+            planVO.setName(projectBean.getName());
+
+            planVO.setRiskList(RiskAction.changeToRiskVos(dataBaseDAO.getAllrisk(projectBean.getPid())));
+
+            returnList.add(planVO);
+        }
+
+        return returnList;
     }
 
     private String name;

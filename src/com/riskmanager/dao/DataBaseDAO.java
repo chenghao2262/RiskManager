@@ -37,7 +37,7 @@ public class DataBaseDAO {
         QueryRunner queryRunner = new QueryRunner();
         Connection connection=utils.getConnection();
         try {
-            List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_detail  on risk.rid=risk_detail.rid order by risk.rid,risk_detail.updateTime",
+            List<Object[]> list = queryRunner.query(connection, "select * from risk left join risk_detail  on risk.rid=risk_detail.rid order by risk.rid,risk_detail.updateTime desc",
                     new ArrayListHandler());
             return changeToAllRiskBean(list);
         }    //加载JDBC驱动
@@ -102,7 +102,7 @@ public class DataBaseDAO {
 		QueryRunner queryRunner = new QueryRunner();
 		Connection connection=utils.getConnection();
 		try {
-			List<Object[]> list = queryRunner.query(connection, "select * from (select risk.* from risk_project,risk where risk_project.pid=? and risk_project.rid=risk.rid) as t left join risk_detail on t.rid=risk_detail.rid   order by t.rid,risk_detail.updateTime",
+			List<Object[]> list = queryRunner.query(connection, "select * from (select risk.* from risk_project,risk where risk_project.pid=? and risk_project.rid=risk.rid) as t left join risk_detail on t.rid=risk_detail.rid   order by t.rid,risk_detail.updateTime desc",
 					new ArrayListHandler(),pid);
 			return changeToAllRiskBean(list);
 		}    //加载JDBC驱动
