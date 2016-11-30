@@ -1,6 +1,3 @@
-/**
- * Created by Ian on 2016/11/20.
- */
 var pidSelected;
 var planList;
 function getPlanList(){
@@ -32,7 +29,7 @@ function planSelect(id){
 }
 
 function getInList(pid){
-	getPlanList();
+    getPlanList();
     var list = planList.list;
     var html = '';
     var inRidList = new Array();
@@ -57,10 +54,34 @@ function updateOut(inRidList){
     var all = JSON.parse(htmlObject.responseText).list;
     updateOutOf("#all-content",all,inRidList);
 
-    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}) );
-    updateOutOf("#distinguised-content", distinguished, inRidList);
-    var problem = JSON.parse($.ajax({url: "problem", async: false}) );
-    updateOutOf("#problem-content", problem, inRidList);
+    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
+    updateOutSelected("#distinguised-content", distinguished, inRidList);
+    var problem = JSON.parse($.ajax({url: "problem", async: false}).responseText );
+    updateOutSelected("#problem-content", problem, inRidList);
+}
+
+function updateOutSelected(of, candidate, inRidList){
+    var outHtml = '';
+    var outIndex = 1;
+    $.each(candidate, function(i){
+        var isIn = false;
+        for(var j=0;j<inRidList.length;j++){
+            if(inRidList[j]==candidate.rid[i]){
+                isIn = true;
+                break;
+            }
+        }
+        if(!isIn){
+            outHtml += '<div class="row my-item" onClick="javascript:riskIn(this,'+candidate[i].rid+');">'+
+                '<div class="col-sm-2">'+outIndex+'</div>'+'' +
+                '<div class="col-sm-10">'+candidate.data.labels[i]+'</div>'+
+                    //'<div class="col-sm-2"><span class="badge" style="background-color: #00C1B3">'+all[i].distinguished+'</span></div>'+
+                    //'<div class="col-sm-2"><span class="badge" style="background-color: #a94442">'+all[i].problem+'</span></div>'+
+                '</div>';
+            outIndex++;
+        }
+    });
+    $(of).html(outHtml);
 }
 
 function updateOutOf(of,candidate,inRidList){
@@ -69,7 +90,7 @@ function updateOutOf(of,candidate,inRidList){
     $.each(candidate, function(i){
         var isIn = false;
         for(var j=0;j<inRidList.length;j++){
-            if(inRidList[j]==all[i].rid){
+            if(inRidList[j]==candidate[i].rid){
                 isIn = true;
                 break;
             }
