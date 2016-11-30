@@ -1,8 +1,6 @@
 package com.riskmanager.action;
 
-import com.riskmanager.bean.RiskBean;
-import com.riskmanager.bean.RiskDetailBean;
-import com.riskmanager.bean.TrackerBean;
+import com.riskmanager.bean.*;
 import com.riskmanager.dao.DataBaseDAO;
 import com.riskmanager.dao.WebContext;
 import org.apache.commons.dbutils.QueryRunner;
@@ -42,9 +40,54 @@ public class RiskAction {
     public String getAllRisk(){
         System.out.println("debug getAllRisk execute");
         dataMap=new HashMap<>();
-        dataMap.put("list",dataBaseDAO.getAllrisk());
+        List<RiskBean> list = dataBaseDAO.getAllrisk();
+
+
+        dataMap.put("list",changeToRiskVos(list));
         dataMap.put("group", webContext.getGroup());
         return "success";
+    }
+
+    public List<RiskVO> changeToRiskVos(List<RiskBean> list){
+        List<RiskVO> returnList= new ArrayList<>();
+
+        for (int i=0;i<list.size();i++){
+            RiskBean riskBean = list.get(i);
+            RiskVO riskVO = new RiskVO();
+            riskVO.setRid(riskBean.getRid());
+            RiskDetailBean riskDetailBean = riskBean.getDetails().get(0);
+            riskVO.setCreator(riskBean.getCreator());
+
+            riskVO.setTime(riskDetailBean.getUpdateTime());
+            riskVO.setRiskTitle(riskDetailBean.getRiskTitle());
+            riskVO.setContent(riskDetailBean.getContent());
+            riskVO.setThreshold(riskDetailBean.getThreshold());
+            riskVO.setRiskPossibility(riskDetailBean.getRiskPossibility());
+            riskVO.setRiskInfluence(riskDetailBean.getRiskInfluence());
+
+            List<RiskDetailBean> riskDetailBeans = riskBean.getDetails();
+
+            ArrayList<HistoryVO> historyVOs = new ArrayList<>();
+
+            for (int j=0;j<riskDetailBeans.size();j++){
+                RiskDetailBean riskDetailBean1 = riskDetailBeans.get(i);
+                HistoryVO historyVO = new HistoryVO();
+
+                historyVO.setRiskInfluence(riskDetailBean1.getRiskInfluence());
+                historyVO.setTime(riskDetailBean1.getUpdateTime());
+                historyVO.setRiskPossibility(riskDetailBean1.getRiskPossibility());
+                historyVO.setThreshold(riskDetailBean1.getThreshold());
+                historyVO.setContent(riskDetailBean1.getContent());
+                historyVO.setRiskTitle(riskDetailBean1.getRiskTitle());
+                historyVO.setUserid(riskDetailBean1.getUpdater());
+                historyVOs.add(historyVO);
+            }
+
+            riskVO.setHistory(historyVOs);
+
+            returnList.add(riskVO);
+        }
+        return returnList;
     }
 
     public Map<String, Object> getDataMap() {
