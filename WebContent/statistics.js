@@ -10,8 +10,8 @@ function search(){
 }
 
 function refreshDistinguishedChart(){
-    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
-
+//    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
+	var distinguished = JSON.parse('{"data":{"datasets":{"fillColor":"gba(133,34,25,.8)","data":[10,40],"strokeColor":"rgba(20,20,20,1)"},"labels":["fengxian2","风险一"]},"rid":[2,1]}');
     var data = {
         labels : ["风险1","风险2","3","33","42","sdfa","ddd"],
         datasets : [

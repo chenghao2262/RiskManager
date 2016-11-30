@@ -49,6 +49,12 @@ function getInList(pid){
         }
 
     });
+    var wrong = "->";
+    $.each(inRidList, function(i){
+    	wrong+=inRidList[i]+",";
+    })
+    
+    alert(wrong)
     $("#in-list").html(html);
     updateOut(inRidList);
 }
@@ -57,8 +63,9 @@ function updateOut(inRidList){
     var all = JSON.parse(htmlObject.responseText).list;
     updateOutOf("#all-content",all,inRidList);
 
+//    var distinguished = JSON.parse('{"data":{"datasets":[{"fillColor":"gba(133,34,25,.8)","data":[1,4],"strokeColor":"rgba(20,20,20,1)"}],"labels":["fengxian2","风险一"]},"rid":[2,1]}')
     var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
-    updateOutSelected("#distinguised-content", distinguished, inRidList);
+    updateOutSelected("#distinguished-content", distinguished, inRidList);
     var problem = JSON.parse($.ajax({url: "problem", async: false}).responseText );
     updateOutSelected("#problem-content", problem, inRidList);
 }
