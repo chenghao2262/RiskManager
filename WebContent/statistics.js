@@ -5,11 +5,12 @@
 var distinguishedChart = new Chart(document.getElementById("distinguished-chart").getContext("2d"));
 var problemChart = new Chart(document.getElementById("problem-chart").getContext("2d"));
 function search(){
-refreshDistinguishedChart();
+    refreshDistinguishedChart();
     refreshProblemChart();
 }
 
 function refreshDistinguishedChart(){
+    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}) );
 
     var data = {
         labels : ["风险1","风险2","3","33","42","sdfa","ddd"],
@@ -26,10 +27,14 @@ function refreshDistinguishedChart(){
             }
         ]
     };
+
+    data = distinguished.data;
     distinguishedChart.Bar(data, null);
 }
 
 function refreshProblemChart(){
+    var problem = JSON.parse($.ajax({url: "problem", async: false}) );
+
     var data = {
         labels : ["风险1","风险2","3","33","42","sdfa","ddd"],
         datasets : [
@@ -45,6 +50,7 @@ function refreshProblemChart(){
             }
         ]
     };
+    data = problem.data;
     problemChart.Bar(data, null);
 }
 

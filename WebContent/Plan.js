@@ -37,7 +37,7 @@ function getInList(pid){
     var inRidList = new Array();
     $.each(list, function(i){
         if(list[i].pid==pid){
-            var inList = list[i].riskList;
+            var inList = list[i].risk;
             $.each(inList, function(j){
                 inRidList.push(inList[j].rid);
                 html += '<div class="row my-item" onClick="javascript:riskOut(this,'+inList[j].rid+');">'+
@@ -52,7 +52,7 @@ function getInList(pid){
     updateOut(inRidList);
 }
 function updateOut(inRidList){
-    var htmlObject = $.ajax({url: "mockList.txt", async: false});
+    var htmlObject = $.ajax({url: "getRisks", async: false});
     var all = JSON.parse(htmlObject.responseText).list;
     updateOutOf("#all-content",all,inRidList);
 
