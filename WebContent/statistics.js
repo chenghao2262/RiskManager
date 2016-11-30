@@ -10,7 +10,7 @@ function search(){
 }
 
 function refreshDistinguishedChart(){
-    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}) );
+    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
 
     var data = {
         labels : ["风险1","风险2","3","33","42","sdfa","ddd"],
@@ -33,7 +33,7 @@ function refreshDistinguishedChart(){
 }
 
 function refreshProblemChart(){
-    var problem = JSON.parse($.ajax({url: "problem", async: false}) );
+    var problem = JSON.parse($.ajax({url: "problem", async: false}).responseText );
 
     var data = {
         labels : ["风险1","风险2","3","33","42","sdfa","ddd"],
