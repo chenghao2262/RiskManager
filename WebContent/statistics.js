@@ -28,7 +28,7 @@ function refreshDistinguishedChart(){
         ]
     };
 
-    data = distinguished.data.data;
+    data = distinguished.data;
     distinguishedChart.Bar(data, null);
 }
 
@@ -50,7 +50,7 @@ function refreshProblemChart(){
             }
         ]
     };
-    data = problem.data.data;
+    data = problem.data;
     problemChart.Bar(data, null);
 }
 
