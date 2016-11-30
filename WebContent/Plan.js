@@ -1,3 +1,6 @@
+/**
+ * Created by Ian on 2016/11/20.
+ */
 var pidSelected;
 var planList;
 function getPlanList(){
@@ -55,9 +58,9 @@ function updateOut(inRidList){
     updateOutOf("#all-content",all,inRidList);
 
     var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
-    updateOutSelected("#distinguised-content", distinguished, inRidList);
+    updateOutSelectedOf("#distinguised-content", distinguished, inRidList);
     var problem = JSON.parse($.ajax({url: "problem", async: false}).responseText );
-    updateOutSelected("#problem-content", problem, inRidList);
+    updateOutSelectedOf("#problem-content", problem, inRidList);
 }
 
 function updateOutSelected(of, candidate, inRidList){
