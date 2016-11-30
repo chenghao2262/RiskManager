@@ -37,7 +37,7 @@ function getInList(pid){
     var inRidList = new Array();
     $.each(list, function(i){
         if(list[i].pid==pid){
-            var inList = list[i].risk;
+            var inList = list[i].riskList;
             $.each(inList, function(j){
                 inRidList.push(inList[j].rid);
                 html += '<div class="row my-item" onClick="javascript:riskOut(this,'+inList[j].rid+');">'+
