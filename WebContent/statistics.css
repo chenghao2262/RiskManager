@@ -1,0 +1,12 @@
+.middle{
+    margin: 0 auto;
+}
+
+#date-range{
+    margin: 2% 10%;
+    max-width: 800px;
+}
+
+#chart-panel{
+    margin: 1% 1% 1% 8%;
+}

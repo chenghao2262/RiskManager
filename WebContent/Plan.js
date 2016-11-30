@@ -4,7 +4,7 @@
 var pidSelected;
 var planList;
 function getPlanList(){
-    var htmlObject = $.ajax({url: "getPlans", async: false});
+    var htmlObject = $.ajax({url: "planResponse.txt", async: false});
     planList = JSON.parse(htmlObject.responseText);
 
     var listHtml = makePlanItemHtml(planList.list);
@@ -51,11 +51,20 @@ function getInList(pid){
     updateOut(inRidList);
 }
 function updateOut(inRidList){
-    var htmlObject = $.ajax({url: "getRisks", async: false});
+    var htmlObject = $.ajax({url: "mockList.txt", async: false});
     var all = JSON.parse(htmlObject.responseText).list;
+    updateOutOf("#all-content",all,inRidList);
+
+    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}) );
+    updateOutOf("#distinguised-content", distinguished, inRidList);
+    var problem = JSON.parse($.ajax({url: "problem", async: false}) );
+    updateOutOf("#problem-content", problem, inRidList);
+}
+
+function updateOutOf(of,candidate,inRidList){
     var outHtml = '';
     var outIndex = 1;
-    $.each(all, function(i){
+    $.each(candidate, function(i){
         var isIn = false;
         for(var j=0;j<inRidList.length;j++){
             if(inRidList[j]==all[i].rid){
@@ -64,13 +73,16 @@ function updateOut(inRidList){
             }
         }
         if(!isIn){
-            outHtml += '<div class="row my-item" onClick="javascript:riskIn(this,'+all[i].rid+');">'+
+            outHtml += '<div class="row my-item" onClick="javascript:riskIn(this,'+candidate[i].rid+');">'+
                 '<div class="col-sm-2">'+outIndex+'</div>'+'' +
-                '<div class="col-sm-8">'+all[i].riskTitle+'</div>'+
+                '<div class="col-sm-10">'+candidate[i].riskTitle+'</div>'+
+                //'<div class="col-sm-2"><span class="badge" style="background-color: #00C1B3">'+all[i].distinguished+'</span></div>'+
+                //'<div class="col-sm-2"><span class="badge" style="background-color: #a94442">'+all[i].problem+'</span></div>'+
                 '</div>';
             outIndex++;
         }
-    })
+    });
+    $(of).html(outHtml);
 }
 
 //将风险移出计划
@@ -79,16 +91,17 @@ function riskOut(self, rid){
     //$("#out-list").html(originHtml+self.outerHTML);
     //$(self).attr("onClick", "riskIn(this")
     //self.outerHTML = '';
-    $.ajax({url:"delRisk", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
+    $.ajax({url:"#", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
     getInList(pidSelected);
 }
 
 //将风险移入计划
 function riskIn(self, rid){
 
-    $.ajax({url:"importRisk", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
+    $.ajax({url:"#", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
     getInList(pidSelected);
 }
+
 function getOutList(pid){
 
 }
@@ -96,7 +109,7 @@ function getOutList(pid){
 function create(){
     var name = $("#new-plan-name").val();
 
-    $.ajax({url:"createPlan", async:false, data:"name="+name, type:"post"});
+    $.ajax({url:"#", async:false, data:"name="+name, type:"post"});
     getPlanList();
 }
 

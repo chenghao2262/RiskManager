@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="statistics.css" rel="stylesheet">
+    <link href="js/need/laydate.css" rel="stylesheet">
+    <link href="js/skins/molv/laydate.css" rel="stylesheet">
+
+    <title>列表</title>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><b>风险管理系统</b>&nbsp;&nbsp;&nbsp;</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="list.html">风险</a></li>
+                <li><a href="Plan.html">风险计划</a></li>
+                <li class="active"><a href="#">统计</a> </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div id="date-range" class="row">
+    <div class="col-lg-5">
+        <div class="input-group col-lg-4">
+            <span class="input-group-addon">开始时间</span>
+            <input type="date" class="form-control" placeholder="Username">
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="input-group col-lg-4">
+            <span class="input-group-addon">结束时间</span>
+            <input type="date" class="form-control" placeholder="Username">
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <button class="btn btn-primary">查询</button>
+
+    </div>
+</div>
+
+
+<div id="chart-panel">
+    <div>
+        <div id="distinguished-legend"></div>
+        <canvas class="middle" id="distinguished-chart" width="800" height="300"></canvas>
+    </div>
+
+    <div>
+        <div id="problem-legend"></div>
+        <canvas class="middle" id="problem-chart" width="800" height="300"></canvas>
+    </div>
+
+</div>
+
+<script src="jquery-2.1.4.min.js"></script>
+<script src="Chart.min.js"></script>
+<script src="statistics.js"></script>
+<script src="js/laydate.js"></script>
+</body>
+</html>

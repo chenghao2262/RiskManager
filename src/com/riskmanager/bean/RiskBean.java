@@ -78,5 +78,6 @@ public class RiskBean {
     }
 
     public RiskBean() {
+
     }
 }

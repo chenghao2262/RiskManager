@@ -32,6 +32,14 @@ body{
 
 }
 
+.my-item-header{
+    margin: 5px 0px 5px 0px;
+    text-align: center;
+    padding: 3 10px;
+    font-weight: bolder;
+    background-color: #1b6d85;
+}
+
 .my-item:hover{
     background-color: #337ab7;
 }

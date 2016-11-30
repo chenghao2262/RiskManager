@@ -137,6 +137,7 @@ public class RiskAction {
             rid = dataBaseDAO.insertRisk(new RiskBean(webContext.getUserName()));
         }
         riskDetailBean.setRid(rid);
+
         riskDetailBean.setContent(content);
         riskDetailBean.setRiskInfluence(riskInfluence);
         riskDetailBean.setThreshold(threshold);
@@ -190,5 +191,11 @@ public class RiskAction {
 
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
+    }
+
+    private int pid;
+    public String importRisk(){
+        dataBaseDAO.insertRiskProject(rid,pid);
+        return "success";
     }
 }
