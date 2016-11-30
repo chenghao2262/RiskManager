@@ -32,6 +32,7 @@ function planSelect(id){
 }
 
 function getInList(pid){
+    getPlanList();
     var list = planList.list;
     var html = '';
     var inRidList = new Array();
@@ -57,9 +58,9 @@ function updateOut(inRidList){
     updateOutOf("#all-content",all,inRidList);
 
     var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
-    updateOutOf("#distinguised-content", distinguished, inRidList);
+    updateOutSelectedOf("#distinguised-content", distinguished, inRidList);
     var problem = JSON.parse($.ajax({url: "problem", async: false}).responseText );
-    updateOutOf("#problem-content", problem, inRidList);
+    updateOutSelectedOf("#problem-content", problem, inRidList);
 }
 
 function updateOutSelected(of, candidate, inRidList){
