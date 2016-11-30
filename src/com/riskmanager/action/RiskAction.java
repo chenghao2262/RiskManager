@@ -48,46 +48,51 @@ public class RiskAction {
         return "success";
     }
 
+
     public static List<RiskVO> changeToRiskVos(List<RiskBean> list){
         List<RiskVO> returnList= new ArrayList<>();
 
         for (int i=0;i<list.size();i++){
-            RiskBean riskBean = list.get(i);
-            RiskVO riskVO = new RiskVO();
-            riskVO.setRid(riskBean.getRid());
-            RiskDetailBean riskDetailBean = riskBean.getDetails().get(0);
-            riskVO.setCreator(riskBean.getCreator());
 
-            riskVO.setTime(riskDetailBean.getUpdateTime());
-            riskVO.setRiskTitle(riskDetailBean.getRiskTitle());
-            riskVO.setContent(riskDetailBean.getContent());
-            riskVO.setThreshold(riskDetailBean.getThreshold());
-            riskVO.setRiskPossibility(riskDetailBean.getRiskPossibility());
-            riskVO.setRiskInfluence(riskDetailBean.getRiskInfluence());
 
-            List<RiskDetailBean> riskDetailBeans = riskBean.getDetails();
-
-            ArrayList<HistoryVO> historyVOs = new ArrayList<>();
-
-            for (int j=0;j<riskDetailBeans.size();j++){
-                RiskDetailBean riskDetailBean1 = riskDetailBeans.get(i);
-                HistoryVO historyVO = new HistoryVO();
-
-                historyVO.setRiskInfluence(riskDetailBean1.getRiskInfluence());
-                historyVO.setTime(riskDetailBean1.getUpdateTime());
-                historyVO.setRiskPossibility(riskDetailBean1.getRiskPossibility());
-                historyVO.setThreshold(riskDetailBean1.getThreshold());
-                historyVO.setContent(riskDetailBean1.getContent());
-                historyVO.setRiskTitle(riskDetailBean1.getRiskTitle());
-                historyVO.setUserid(riskDetailBean1.getUpdater());
-                historyVOs.add(historyVO);
-            }
-
-            riskVO.setHistory(historyVOs);
-
-            returnList.add(riskVO);
+            returnList.add(changeToRiskVo(list.get(i)));
         }
         return returnList;
+    }
+
+    public static RiskVO changeToRiskVo(RiskBean riskBean){
+        RiskVO riskVO = new RiskVO();
+        riskVO.setRid(riskBean.getRid());
+        RiskDetailBean riskDetailBean = riskBean.getDetails().get(0);
+        riskVO.setCreator(riskBean.getCreator());
+
+        riskVO.setTime(riskDetailBean.getUpdateTime());
+        riskVO.setRiskTitle(riskDetailBean.getRiskTitle());
+        riskVO.setContent(riskDetailBean.getContent());
+        riskVO.setThreshold(riskDetailBean.getThreshold());
+        riskVO.setRiskPossibility(riskDetailBean.getRiskPossibility());
+        riskVO.setRiskInfluence(riskDetailBean.getRiskInfluence());
+
+        List<RiskDetailBean> riskDetailBeans = riskBean.getDetails();
+
+        ArrayList<HistoryVO> historyVOs = new ArrayList<>();
+
+        for (int j=0;j<riskDetailBeans.size();j++){
+            RiskDetailBean riskDetailBean1 = riskDetailBeans.get(j);
+            HistoryVO historyVO = new HistoryVO();
+
+            historyVO.setRiskInfluence(riskDetailBean1.getRiskInfluence());
+            historyVO.setTime(riskDetailBean1.getUpdateTime());
+            historyVO.setRiskPossibility(riskDetailBean1.getRiskPossibility());
+            historyVO.setThreshold(riskDetailBean1.getThreshold());
+            historyVO.setContent(riskDetailBean1.getContent());
+            historyVO.setRiskTitle(riskDetailBean1.getRiskTitle());
+            historyVO.setUserid(riskDetailBean1.getUpdater());
+            historyVOs.add(historyVO);
+        }
+
+        riskVO.setHistory(historyVOs);
+        return riskVO;
     }
 
     public Map<String, Object> getDataMap() {
@@ -240,5 +245,37 @@ public class RiskAction {
     public String importRisk(){
         dataBaseDAO.insertRiskProject(rid,pid);
         return "success";
+    }
+
+    public String distinguished(){
+        dataMap = new HashMap<>();
+        List<Object[]> objects = dataBaseDAO.getYinyong();
+        List<String> labels = new ArrayList<>();
+        List<Integer> data = new ArrayList<>();
+        List<Integer> rids = new ArrayList<>();
+        for (int i=0;i<objects.size() && i<10;i++){
+            Object[] os = objects.get(i);
+            int rid = Integer.parseInt(String.valueOf(os[0]));
+            int count = Integer.parseInt(String.valueOf(os[1]));
+
+            RiskBean riskBean = dataBaseDAO.getRiskBean(rid);
+
+            RiskVO riskVO = changeToRiskVo(riskBean);
+            labels.add(riskVO.getRiskTitle());
+            data.add(count);
+            rids.add(rid);
+        }
+
+
+        HashMap<String,Object> datasets = new HashMap<>();
+        HashMap<String,Object> totalData = new HashMap<>();
+        totalData.put("labels",labels);
+        datasets.put("fillColor","gba(133,34,25,.8)");
+        datasets.put("strokeColor","rgba(20,20,20,1)");
+        datasets.put("data",data);
+        totalData.put("datasets",datasets);
+        dataMap.put("data",totalData);
+        dataMap.put("rid",rids);
+         return "success";
     }
 }
