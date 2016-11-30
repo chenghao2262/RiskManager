@@ -58,9 +58,9 @@ function updateOut(inRidList){
     updateOutOf("#all-content",all,inRidList);
 
     var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
-    updateOutSelectedOf("#distinguised-content", distinguished, inRidList);
+    updateOutSelected("#distinguised-content", distinguished, inRidList);
     var problem = JSON.parse($.ajax({url: "problem", async: false}).responseText );
-    updateOutSelectedOf("#problem-content", problem, inRidList);
+    updateOutSelected("#problem-content", problem, inRidList);
 }
 
 function updateOutSelected(of, candidate, inRidList){
