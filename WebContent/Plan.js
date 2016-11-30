@@ -4,6 +4,7 @@
 var pidSelected;
 var planList;
 function getPlanList(){
+    //var htmlObject = $.ajax({url: "planResponse.txt", async: false});
     var htmlObject = $.ajax({url: "planResponse.txt", async: false});
     planList = JSON.parse(htmlObject.responseText);
 
@@ -98,7 +99,7 @@ function riskOut(self, rid){
 //将风险移入计划
 function riskIn(self, rid){
 
-    $.ajax({url:"#", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
+    $.ajax({url:"importRisk", async:false, data:"pid="+pidSelected+"&rid="+rid, type:"post"});
     getInList(pidSelected);
 }
 
@@ -109,7 +110,7 @@ function getOutList(pid){
 function create(){
     var name = $("#new-plan-name").val();
 
-    $.ajax({url:"#", async:false, data:"name="+name, type:"post"});
+    $.ajax({url:"createPlan", async:false, data:"name="+name, type:"post"});
     getPlanList();
 }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>风险计划</title>
 
-    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="Plan.css" rel="stylesheet">
 </head>
 <body>
@@ -20,13 +20,12 @@
             <ul class="nav navbar-nav">
                 <li><a href="list.html">风险</a></li>
                 <li class="active"><a href="#">风险计划</a></li>
-                <li><a href="statistics.html">统计</a> </li>
+                <li><a href="statisticNew.html">统计</a> </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 
-<row>
     <div id="plan-panel" class="col-lg-4">
         <div class="input-group">
             <span class="input-group-addon">
@@ -52,21 +51,68 @@
         </div>
     </div>
     <div id="out-panel" class="col-lg-4">
-        <!--<button class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;移入 </button>-->
-        <div class="row my-item-header">
-            <div class="col-sm-2">#</div>
-            <div class="col-sm-6">风险标题</div>
-            <div class="col-sm-2"><span class="badge">识别</span></div>
-                <div class="col-sm-2"><span class="badge">问题</span></div>
-        </div>
-        <div id="in-list">
-        <div id="out-list">
+        <ul id="out-tab" class="nav nav-pills">
 
+            <li class="active">
+                <a href="#all" data-toggle="pill">
+                    全部
+                </a>
+            </li>
+            <li>
+                <a href="#distinguished" data-toggle="pill">
+                    被识别
+                </a>
+            </li>
+            <li>
+                <a href="#problem" data-toggle="pill">
+                    问题演变
+                </a>
+            </li>
+
+        </ul>
+        <!--<button class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;移入 </button>-->
+        <div class="tab-content" id="out-tab-content">
+            <div id="all" class="tab-pane">
+                <div class="row my-item-header">
+                    <div class="col-sm-2">#</div>
+                    <div class="col-sm-6">风险标题</div>
+                    <div class="col-sm-2"><span class="badge">识别</span></div>
+                    <div class="col-sm-2"><span class="badge">问题</span></div>
+                </div>
+                <div id="all-content">
+
+                </div>
+            </div>
+            <div id="distinguished" class="tab-pane">
+                <div class="row my-item-header">
+                    <div class="col-sm-2">#</div>
+                    <div class="col-sm-6">风险标题</div>
+                    <div class="col-sm-2"><span class="badge">识别</span></div>
+                    <div class="col-sm-2"><span class="badge">问题</span></div>
+                </div>
+                <div id="distinguished-content">
+
+                </div>
+            </div>
+            <div id="problem" class="tab-pane">
+                <div class="row my-item-header">
+                    <div class="col-sm-2">#</div>
+                    <div class="col-sm-6">风险标题</div>
+                    <div class="col-sm-2"><span class="badge">识别</span></div>
+                    <div class="col-sm-2"><span class="badge">问题</span></div>
+                </div>
+                <div id="problem-content">
+
+                </div>
+            </div>
         </div>
+
     </div>
-</row>
+
+
 
 <script src="jquery-2.1.4.min.js"></script>
+<script src="bootstrap.min.js"></script>
 <script src="Plan.js"></script>
 </body>
 </html>
