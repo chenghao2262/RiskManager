@@ -4,9 +4,13 @@
 
 var distinguishedChart = new Chart(document.getElementById("distinguished-chart").getContext("2d"));
 var problemChart = new Chart(document.getElementById("problem-chart").getContext("2d"));
-
+function search(){
+refreshDistinguishedChart();
+    refreshProblemChart();
+}
 
 function refreshDistinguishedChart(){
+
     var data = {
         labels : ["风险1","风险2","3","33","42","sdfa","ddd"],
         datasets : [
