@@ -9,14 +9,14 @@ body{
 }
 
 #in-panel{
-    background-color: #999999;
+    background-color: #d9dede;
     min-height: 1000px;
     padding-top: 10px;
 
 }
 
 #out-panel{
-    background-color: #8c8c8c;
+    background-color: #f9f2f4;
     min-height: 1000px;
     padding-top: 10px;
 

@@ -56,10 +56,34 @@ function updateOut(inRidList){
     var all = JSON.parse(htmlObject.responseText).list;
     updateOutOf("#all-content",all,inRidList);
 
-    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}) );
+    var distinguished = JSON.parse($.ajax({url: "distinguished", async: false}).responseText );
     updateOutOf("#distinguised-content", distinguished, inRidList);
-    var problem = JSON.parse($.ajax({url: "problem", async: false}) );
+    var problem = JSON.parse($.ajax({url: "problem", async: false}).responseText );
     updateOutOf("#problem-content", problem, inRidList);
+}
+
+function updateOutSelected(of, candidate, inRidList){
+    var outHtml = '';
+    var outIndex = 1;
+    $.each(candidate, function(i){
+        var isIn = false;
+        for(var j=0;j<inRidList.length;j++){
+            if(inRidList[j]==candidate.rid[i]){
+                isIn = true;
+                break;
+            }
+        }
+        if(!isIn){
+            outHtml += '<div class="row my-item" onClick="javascript:riskIn(this,'+candidate[i].rid+');">'+
+                '<div class="col-sm-2">'+outIndex+'</div>'+'' +
+                '<div class="col-sm-10">'+candidate.data.labels[i]+'</div>'+
+                    //'<div class="col-sm-2"><span class="badge" style="background-color: #00C1B3">'+all[i].distinguished+'</span></div>'+
+                    //'<div class="col-sm-2"><span class="badge" style="background-color: #a94442">'+all[i].problem+'</span></div>'+
+                '</div>';
+            outIndex++;
+        }
+    });
+    $(of).html(outHtml);
 }
 
 function updateOutOf(of,candidate,inRidList){
@@ -68,7 +92,7 @@ function updateOutOf(of,candidate,inRidList){
     $.each(candidate, function(i){
         var isIn = false;
         for(var j=0;j<inRidList.length;j++){
-            if(inRidList[j]==all[i].rid){
+            if(inRidList[j]==candidate[i].rid){
                 isIn = true;
                 break;
             }

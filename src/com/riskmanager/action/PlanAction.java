@@ -54,7 +54,7 @@ public class PlanAction {
             planVO.setPid(projectBean.getPid());
 
             planVO.setName(projectBean.getName());
-
+            System.out.println(projectBean.getRiskBeen().size());
             planVO.setRiskList(RiskAction.changeToRiskVos(projectBean.getRiskBeen()));
 
             returnList.add(planVO);

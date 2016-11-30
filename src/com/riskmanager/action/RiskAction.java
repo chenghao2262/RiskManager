@@ -247,6 +247,14 @@ public class RiskAction {
         return "success";
     }
 
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
     public String distinguished(){
         dataMap = new HashMap<>();
         List<Object[]> objects = dataBaseDAO.getYinyong();
