@@ -69,6 +69,7 @@ function updateOutSelected(of, candidate, inRidList){
     $.each(candidate, function(i){
         var isIn = false;
         for(var j=0;j<inRidList.length;j++){
+        	alert("in id:"+inRidList[j]+";cid :"+candidate.rid[i])
             if(inRidList[j]==candidate.rid[i]){
                 isIn = true;
                 break;
