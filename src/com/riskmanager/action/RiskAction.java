@@ -278,14 +278,15 @@ public class RiskAction {
             rids.add(rid);
         }
 
-
+        List<Map<String,Object>> dataArray = new ArrayList<>();
         HashMap<String,Object> datasets = new HashMap<>();
         HashMap<String,Object> totalData = new HashMap<>();
         totalData.put("labels",labels);
         datasets.put("fillColor","gba(133,34,25,.8)");
         datasets.put("strokeColor","rgba(20,20,20,1)");
         datasets.put("data",data);
-        totalData.put("datasets",datasets);
+        dataArray.add(datasets);
+        totalData.put("datasets",dataArray);
         dataMap.put("data",totalData);
         dataMap.put("rid",rids);
         return totalData;
