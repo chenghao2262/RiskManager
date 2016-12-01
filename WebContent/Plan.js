@@ -10,7 +10,6 @@ function getPlanList(){
 
     var listHtml = makePlanItemHtml(planList.list);
 //alert(htmlObject.responseText);
-
     $('#plan-list').html(listHtml)
 }
 
@@ -49,12 +48,6 @@ function getInList(pid){
         }
 
     });
-    var wrong = "->";
-    $.each(inRidList, function(i){
-    	wrong+=inRidList[i]+",";
-    })
-    
-    alert(wrong)
     $("#in-list").html(html);
     updateOut(inRidList);
 }
